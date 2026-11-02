@@ -40,3 +40,24 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           wranglerVersion: '4.156.1'
           command: deploy
+
+      # The page has no script. A script in the live page means Cloudflare added one,
+      # for example the Web Analytics beacon, which must not load before consent.
+      # A new custom domain can take a minute to answer, so each address gets a few tries.
+      - name: Check that the live page loads no script
+        run: |
+          for host in sudohire.dev www.sudohire.dev; do
+            body=""
+            for try in 1 2 3 4 5 6; do
+              body=$(curl -fsS "https://$host/") && break
+              sleep 20
+            done
+            if [ -z "$body" ]; then
+              echo "::error::https://$host/ did not answer."
+              exit 1
+            fi
+            if grep -qiE '<script|cloudflareinsights' <<< "$body"; then
+              echo "::error::https://$host/ has a script. Check that Cloudflare Web Analytics is off."
+              exit 1
+            fi
+          done
