@@ -26,12 +26,35 @@ These files in sudo-hire are the sources of truth:
 
 When the site and these files disagree, stop and ask. Do not guess.
 
-## Commits and pull requests
+## Git conventions
 
+### Commits
+
+- Small conventional commits: `feat:`, `fix:`, `test:`, `refactor:`, `docs:`, `chore:`.
+- One commit per green test cycle is fine. Do not squash everything at the end.
+- Format: `type: short subject` (50 characters at most), then a body paragraph. The body says what changed and why, not how.
+- Use a heredoc for a commit message with more than one line.
 - Show the exact commit message and pull request text first. Wait for a yes.
-- No AI attribution anywhere. No `Co-Authored-By` trailers. No "Generated with Claude" lines.
-- Commits use the owner's git identity.
-- Never merge your own pull request.
+
+### No tool attribution
+
+- Never attribute a commit or a pull request to a tool. No "Generated with ..." line. No `Co-Authored-By` trailer for a tool.
+- This covers the pull request description too, not only the commit message. Some tools add a footer with a session link when they open a pull request. Remove it from the description before asking for review.
+- On a local machine, configuration stops it. Keep `"attribution": { "commit": "", "pr": "", "commitTrailers": false, "sessionUrl": false }` in `~/.claude/settings.json`.
+- In a cloud session, configuration does not stop it. The footer is added on the way out, so no settings file in the container removes it. Check the description of a pull request opened from a cloud session. Then remove the footer from a machine outside that session: in the GitHub web interface, or with `gh api -X PATCH repos/<owner>/<repo>/pulls/<number>` and the corrected body.
+
+### Author
+
+- Commits are authored by the repository owner, not by a tool.
+- A cloud container can ship a global git identity for the tool, and every commit then inherits it. Set `git config user.name` and `git config user.email` before the first commit. Check with `git log -1 --format='%an <%ae>'`.
+- The author is separate from the message. A clean message says nothing about the author, so check both.
+
+### Branches and pull requests
+
+- Every commit goes through a pull request, never straight to `main`.
+- The one exception: a commit that changes only markdown files can go straight to `main`.
+- A push to `main` deploys the site. So a merged pull request goes live.
+- Never push to `main` outside that exception, and never merge your own pull request. These rules hold even when GitHub would allow it.
 
 ## Before every commit and pull request
 
@@ -40,6 +63,7 @@ Do two passes.
 1. Clarity pass. Use short sentences. Use one word for one meaning.
 2. Confidentiality pass:
    - Name no repository except sudo-hire, sudo-hire-docs and their dependencies.
+   - Name no other site. The one exception is the footer, which links to the copyright holder's sites: albertoarena.it and sudoplay.dev.
    - Name no person except the copyright holder.
    - Do not name AI sessions or reviews.
    - Do not evaluate tools or companies.
