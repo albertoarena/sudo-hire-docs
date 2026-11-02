@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Sudo Hire share card</title>
+<!-- Source of placeholder/og.png. Render at 1200x630: see art/README.md. -->
+<style>
+:root{--burgundy:#5E1B2B;--burgundy-ink:#F4E8EA;--page:#F7F5F2;--panel:#FFFFFF;--ink:#1E2230;--ink-2:#4F5361;--rule:#DCD7D0;--ok:#2B6648;
+  --font:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;--mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace}
+*{box-sizing:border-box}
+html,body{margin:0;width:1200px;height:630px;overflow:hidden}
+body{background:var(--page);color:var(--ink);font-family:var(--font);-webkit-font-smoothing:antialiased;display:flex;flex-direction:column}
+.strip{height:84px;flex:none;display:flex;align-items:center;padding:0 72px;background-color:var(--burgundy);color:var(--burgundy-ink);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='42' viewBox='0 0 96 42'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='.55'%3E%3Cpath stroke-opacity='.10' d='M0 6 C12 -1 36 -1 48 6 S84 13 96 6'/%3E%3Cpath stroke-opacity='.10' d='M0 12 C12 5 36 5 48 12 S84 19 96 12'/%3E%3Cpath stroke-opacity='.10' d='M0 18 C12 11 36 11 48 18 S84 25 96 18'/%3E%3Cpath stroke-opacity='.10' d='M0 24 C12 17 36 17 48 24 S84 31 96 24'/%3E%3Cpath stroke-opacity='.10' d='M0 30 C12 23 36 23 48 30 S84 37 96 30'/%3E%3Cpath stroke-opacity='.10' d='M0 36 C12 29 36 29 48 36 S84 43 96 36'/%3E%3Cpath stroke-opacity='.07' d='M0 3 C12 10 36 10 48 3 S84 -4 96 3'/%3E%3Cpath stroke-opacity='.07' d='M0 9 C12 16 36 16 48 9 S84 2 96 9'/%3E%3Cpath stroke-opacity='.07' d='M0 15 C12 22 36 22 48 15 S84 8 96 15'/%3E%3Cpath stroke-opacity='.07' d='M0 21 C12 28 36 28 48 21 S84 14 96 21'/%3E%3Cpath stroke-opacity='.07' d='M0 27 C12 34 36 34 48 27 S84 20 96 27'/%3E%3Cpath stroke-opacity='.07' d='M0 33 C12 40 36 40 48 33 S84 26 96 33'/%3E%3Cpath stroke-opacity='.07' d='M0 39 C12 46 36 46 48 39 S84 32 96 39'/%3E%3C/g%3E%3C/svg%3E");background-size:192px 84px;font-size:30px;font-weight:600;letter-spacing:.01em}
+main{flex:1;display:grid;grid-template-columns:1fr 330px;gap:56px;align-items:center;padding:0 72px}
+.cmd{margin:0 0 22px;font-family:var(--mono);font-size:26px;color:var(--ink-2)}
+.cmd b{color:var(--ink);font-weight:600}
+h1{margin:0;font-size:62px;line-height:1.06;font-weight:700;letter-spacing:-.025em}
+.sub{margin:22px 0 0;font-size:25px;color:var(--ink-2)}
+.job{background:var(--panel);border-radius:12px;box-shadow:0 0 0 1px var(--rule);padding:26px 26px 24px;display:flex;flex-direction:column;align-items:flex-start;gap:18px}
+.title{font-size:25px;font-weight:600;line-height:1.25}
+.stamp{display:inline-flex;flex-direction:column;align-items:center;padding:4px 14px 6px;border:3px solid currentColor;border-radius:7px;
+  line-height:1.15;text-transform:uppercase;color:var(--ok);transform:rotate(-1.5deg)}
+.stamp .c{font-size:24px;font-weight:700;letter-spacing:.08em}
+.stamp .w{font-size:21px;font-weight:600;letter-spacing:.06em}
+</style>
+</head>
+<body>
+  <div class="strip">Sudo Hire</div>
+  <main>
+    <div>
+      <p class="cmd">$ sudo hire <b>--remote-from here</b></p>
+      <h1>“Remote” often does not mean remote from anywhere.</h1>
+      <p class="sub">A macOS menu bar app for PHP and Laravel developers.</p>
+    </div>
+    <div class="job">
+      <span class="title">Senior Laravel Developer</span>
+      <span class="stamp"><span class="c">IT</span> <span class="w">Admitted</span></span>
+    </div>
+  </main>
+</body>
+</html>

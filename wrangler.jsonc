@@ -1,0 +1,15 @@
+// Cloudflare Workers static assets.
+// Until the real site is built, it serves the placeholder page from ./placeholder.
+// A request that matches no file runs src/worker.js, which redirects it to the home page.
+{
+  "name": "sudohire",
+  "main": "src/worker.js",
+  "compatibility_date": "2026-11-02",
+  "assets": {
+    "directory": "./placeholder"
+  },
+  "routes": [
+    { "pattern": "sudohire.dev", "custom_domain": true },
+    { "pattern": "www.sudohire.dev", "custom_domain": true }
+  ]
+}
