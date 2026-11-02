@@ -30,7 +30,7 @@ When the site and these files disagree, stop and ask. Do not guess.
 
 ### Commits
 
-- Small conventional commits: `feat:`, `fix:`, `test:`, `refactor:`, `docs:`, `chore:`.
+- Small conventional commits: `feat:`, `fix:`, `test:`, `refactor:`, `docs:`, `chore:`, `ci:`.
 - One commit per green test cycle is fine. Do not squash everything at the end.
 - Format: `type: short subject` (50 characters at most), then a body paragraph. The body says what changed and why, not how.
 - Use a heredoc for a commit message with more than one line.
@@ -55,6 +55,13 @@ When the site and these files disagree, stop and ask. Do not guess.
 - The one exception: a commit that changes only markdown files can go straight to `main`.
 - A push to `main` deploys the site. So a merged pull request goes live.
 - Never push to `main` outside that exception, and never merge your own pull request. These rules hold even when GitHub would allow it.
+
+## Deploy
+
+- Cloudflare Workers serves the site on sudohire.dev and www.sudohire.dev. `wrangler.jsonc` holds the config.
+- The Deploy workflow runs the tests and deploys on every push to `main`.
+- It needs two repository secrets: `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`. The token needs Workers Scripts Write on the account and Workers Routes Write on the sudohire.dev zone.
+- Cloudflare Web Analytics stays off for sudohire.dev. Its beacon would load before consent. After each deploy, the workflow fails if the live page serves a script.
 
 ## Before every commit and pull request
 
