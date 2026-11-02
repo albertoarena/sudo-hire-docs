@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sudo Hire: coming soon</title>
+<meta name="description" content="Remote PHP and Laravel jobs you can apply to from where you live. A macOS menu bar app, in development.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://sudohire.dev/">
+<meta property="og:title" content="Sudo Hire">
+<meta property="og:description" content="Remote PHP and Laravel jobs you can apply to from where you live.">
+<meta property="og:image" content="https://sudohire.dev/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Sudo Hire: “Remote” often does not mean remote from anywhere. A job stamped IT, admitted.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#5E1B2B">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='100 100 824 824'%3E%3Crect x='100' y='100' width='824' height='824' rx='184' fill='%235E1B2B'/%3E%3C/svg%3E">
+<style>
+:root{--burgundy:#5E1B2B;--burgundy-ink:#F4E8EA;--page:#F7F5F2;--panel:#FFFFFF;--sunk:#EEEBE6;--ink:#1E2230;--ink-2:#4F5361;--ink-3:#62666F;--rule:#DCD7D0;
+  --ok:#2B6648;--no:#A63F2A;--focus:#8A2E44;
+  --font:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;color-scheme:light}
+@media (prefers-color-scheme:dark){:root{--burgundy:#6A2133;--burgundy-ink:#F6E9EC;--page:#1D1B1F;--panel:#29262B;--sunk:#242126;--ink:#ECE8EA;--ink-2:#B7B1B6;--ink-3:#A49EA4;--rule:#3A363C;
+  --ok:#7CC29E;--no:#EE8B74;--focus:#E59AAE;color-scheme:dark}}
+*{box-sizing:border-box}
+::selection{background:var(--burgundy);color:var(--burgundy-ink)}
+body{margin:0;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;background:var(--page);color:var(--ink);
+  font-family:var(--font);font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{width:100%;max-width:1120px;margin:0 auto;padding:0 40px}
+
+/* The cover: the app's header strip, with its guilloche, at page scale. */
+.strip{background-color:var(--burgundy);color:var(--burgundy-ink);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='42' viewBox='0 0 96 42'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='.55'%3E%3Cpath stroke-opacity='.10' d='M0 6 C12 -1 36 -1 48 6 S84 13 96 6'/%3E%3Cpath stroke-opacity='.10' d='M0 12 C12 5 36 5 48 12 S84 19 96 12'/%3E%3Cpath stroke-opacity='.10' d='M0 18 C12 11 36 11 48 18 S84 25 96 18'/%3E%3Cpath stroke-opacity='.10' d='M0 24 C12 17 36 17 48 24 S84 31 96 24'/%3E%3Cpath stroke-opacity='.10' d='M0 30 C12 23 36 23 48 30 S84 37 96 30'/%3E%3Cpath stroke-opacity='.10' d='M0 36 C12 29 36 29 48 36 S84 43 96 36'/%3E%3Cpath stroke-opacity='.07' d='M0 3 C12 10 36 10 48 3 S84 -4 96 3'/%3E%3Cpath stroke-opacity='.07' d='M0 9 C12 16 36 16 48 9 S84 2 96 9'/%3E%3Cpath stroke-opacity='.07' d='M0 15 C12 22 36 22 48 15 S84 8 96 15'/%3E%3Cpath stroke-opacity='.07' d='M0 21 C12 28 36 28 48 21 S84 14 96 21'/%3E%3Cpath stroke-opacity='.07' d='M0 27 C12 34 36 34 48 27 S84 20 96 27'/%3E%3Cpath stroke-opacity='.07' d='M0 33 C12 40 36 40 48 33 S84 26 96 33'/%3E%3Cpath stroke-opacity='.07' d='M0 39 C12 46 36 46 48 39 S84 32 96 39'/%3E%3C/g%3E%3C/svg%3E")}
+.strip .wrap{height:48px;display:flex;align-items:center;font-size:15px;font-weight:600;letter-spacing:.01em}
+
+main.wrap{flex:1;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:56px 72px;align-items:center;align-content:center;padding-top:88px;padding-bottom:88px}
+.cmd{margin:0 0 22px;font-family:var(--mono);font-size:15px;color:var(--ink-2)}
+.cmd span{color:var(--ink-3)}
+.cmd b{color:var(--ink);font-weight:600}
+h1{margin:0;font-size:clamp(34px,4.6vw,56px);line-height:1.08;font-weight:700;letter-spacing:-.025em;text-wrap:balance}
+.lede{margin:24px 0 0;max-width:46ch;font-size:19px;line-height:1.55;color:var(--ink-2);text-wrap:pretty}
+
+/* Two jobs, the way the menu bar list shows them. */
+figure{margin:0}
+.list{background:var(--panel);border-radius:8px;box-shadow:0 0 0 .5px var(--rule);overflow:hidden}
+.job{display:flex;align-items:flex-start;gap:12px;padding:16px 18px 15px}
+.job+.job{border-top:.5px solid var(--rule)}
+.job .t{flex:1;min-width:0}
+.job .title{display:block;font-size:16px;font-weight:600;line-height:1.3}
+.job .terms{display:block;margin-top:3px;font-size:13px;color:var(--ink-2)}
+.job.hidden{background:var(--sunk)}
+.job.hidden .title{font-weight:500;color:var(--ink-2);text-decoration:line-through;text-decoration-color:var(--ink-3);text-decoration-thickness:1px}
+.job.hidden .terms{color:var(--ink-3)}
+.stamp{flex:none;display:inline-flex;flex-direction:column;align-items:center;padding:2px 7px 3px;border:1.5px solid currentColor;border-radius:4px;
+  line-height:1.15;text-transform:uppercase;color:var(--ok);transform:rotate(var(--r,-1.5deg))}
+.stamp .c{font-size:12px;font-weight:700;letter-spacing:.08em}
+.stamp .w{font-size:11px;font-weight:600;letter-spacing:.06em}
+.stamp.no{color:var(--no)}
+figcaption{margin-top:10px;font-size:13px;color:var(--ink-3)}
+
+.status{grid-column:1/-1;display:flex;align-items:flex-start;gap:10px;margin:0;padding:12px 16px;background:var(--sunk);border-radius:6px;font-size:15px;color:var(--ink-2)}
+.status::before{content:"";flex:none;width:7px;height:7px;border-radius:50%;margin-top:.62em;background:var(--burgundy)}
+.status b{color:var(--ink);font-weight:600}
+
+footer .wrap>div{display:flex;flex-wrap:wrap;justify-content:space-between;gap:0 32px;padding:14px 0 26px;border-top:.5px solid var(--rule);font-size:15px;color:var(--ink-2)}
+footer p{margin:0}
+footer a{display:inline-block;padding:11px 0}
+a{color:var(--ink);text-underline-offset:.22em;text-decoration-thickness:1px;text-decoration-color:var(--ink-3)}
+a:hover{text-decoration-thickness:2px;text-decoration-color:currentColor}
+a:focus-visible{outline:2px solid var(--focus);outline-offset:3px;border-radius:2px}
+
+/* One moment: the stamp lands on the first job. It starts visible, so a capture at load still shows it. */
+@media (prefers-reduced-motion:no-preference){
+  .job:first-child .stamp{animation:land .5s cubic-bezier(.16,1,.3,1) .2s backwards}
+  @keyframes land{from{transform:rotate(-6deg) scale(1.15)}to{opacity:1;transform:rotate(var(--r,-1.5deg)) scale(1)}}
+}
+@media (prefers-color-scheme:dark){.status::before{background:var(--focus)}}
+@media (max-width:860px){main.wrap{grid-template-columns:minmax(0,1fr);align-items:start;align-content:start;padding-top:48px;padding-bottom:48px;gap:40px}}
+@media (max-width:700px){.wrap{padding:0 16px}.lede{font-size:18px}.cmd{font-size:14px}}
+</style>
+</head>
+<body>
+  <header class="strip"><div class="wrap">Sudo Hire</div></header>
+  <main class="wrap">
+    <div>
+      <p class="cmd"><span>$</span> sudo hire <b>--remote-from here</b></p>
+      <h1>“Remote” often does not mean remote from anywhere.</h1>
+      <p class="lede">Sudo Hire is a macOS menu bar app for PHP and Laravel developers. It checks where you can work from, so a developer in Italy does not see a job that is “Remote, US only”.</p>
+    </div>
+    <figure>
+      <div class="list">
+        <div class="job">
+          <span class="t"><span class="title">Senior Laravel Developer</span> <span class="terms">Full time, Senior</span></span>
+          <span class="stamp" style="--r:-1.5deg"><span class="c">IT</span> <span class="w">Admitted</span></span>
+        </div>
+        <div class="job hidden">
+          <span class="t"><span class="title">PHP Backend Engineer</span> <span class="terms">Hidden by Sudo Hire</span></span>
+          <span class="stamp no" style="--r:1.2deg"><span class="c">US</span> <span class="w">Only</span></span>
+        </div>
+      </div>
+      <figcaption>Example</figcaption>
+    </figure>
+    <p class="status"><span><b>In development.</b> The docs open with the first release.</span></p>
+  </main>
+  <footer>
+    <div class="wrap"><div>
+      <p>Made by <a href="https://albertoarena.it/?utm_source=sudohire.dev&amp;utm_medium=referral&amp;utm_campaign=placeholder" target="_blank" rel="noopener">Alberto Arena</a>.</p>
+      <p><a href="https://sudoplay.dev/?utm_source=sudohire.dev&amp;utm_medium=referral&amp;utm_campaign=placeholder" target="_blank" rel="noopener">sudoplay.dev</a></p>
+    </div></div>
+  </footer>
+</body>
+</html>
