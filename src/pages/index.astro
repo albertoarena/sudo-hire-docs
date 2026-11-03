@@ -1,16 +1,23 @@
 ---
-// A bare page for the scaffold. The design and the copy come in later phases (docs/PLAN.md).
+import Base from '../layouts/Base.astro';
+import { downloadUrl } from '../data/links';
 ---
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Sudo Hire</title>
-  </head>
-  <body>
-    <main>
+<Base title="Sudo Hire" home>
+  <div class="page home">
+    <div>
       <h1>Sudo Hire</h1>
-    </main>
-  </body>
-</html>
+      <p class="tagline">$ sudo hire <b>--remote-from here</b></p>
+      <div class="answer">
+        <p>Sudo Hire is a macOS menu bar app for PHP and Laravel developers. It checks where you can work from, so a developer in Italy does not see a job that is “Remote, US only”.</p>
+        <a class="button" href={downloadUrl}>
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2.5v8" /><path d="M4.5 7 8 10.5 11.5 7" /><path d="M3 13.5h10" /></svg>
+          Download for Mac
+        </a>
+      </div>
+    </div>
+    <figure class="shot">
+      <div class="frame">The screenshot of the menu bar list comes from the release build.</div>
+      <figcaption>The menu bar list.</figcaption>
+    </figure>
+  </div>
+</Base>
