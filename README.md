@@ -10,4 +10,4 @@ Status: A placeholder page is live. The site is planned; the brief comes next.
 
 - `npm test` runs the tests.
 - `npx wrangler dev` serves the page and the redirect locally.
-- Every push to `main` runs the tests and deploys the page to Cloudflare Workers. `wrangler.jsonc` holds the deploy config.
+- The Deploy workflow runs the tests and deploys the page to Cloudflare Workers. It runs only when started by hand. `wrangler.jsonc` holds the deploy config.
