@@ -18,7 +18,7 @@ The site tells a user how to get the app, how to set it up and what each screen 
 - **Test first:** commit the failing test, then the code. One commit per green cycle.
 - **Design comes from the app:** the colors and type of `docs/DESIGN.md` in sudo-hire. The site uses the tokens of the app, not its layout. The owner leads the design phase, with Impeccable. No styles, copy or layout before that phase.
 - **Fonts are self hosted.** No font from another site.
-- **No third party request before consent:** no font service, no iframe, no embed, no search widget.
+- **No request to another site before consent:** no font service, no iframe, no embed, no search widget.
 - **Analytics:** Google Analytics 4 (GA4), loaded only after an explicit accept. See "The analytics rule" below.
 - **Cloudflare Web Analytics stays off** for the zone. Its beacon would load before consent.
 - **Footer:** links to albertoarena.it and sudoplay.dev, with `utm_source=sudohire.dev`, as on the placeholder. This is the one exception to "name no other site" in `AGENTS.md`. Decided by the owner on 2026-11-03.
