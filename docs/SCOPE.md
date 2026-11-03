@@ -72,7 +72,7 @@ The app has no telemetry. The site has GA4 behind consent. These are two differe
 ### Now: the placeholder on Cloudflare Workers
 
 - A placeholder page is live on sudohire.dev and www.sudohire.dev since 2026-11-02. It is served from Cloudflare Workers (`wrangler.jsonc`, `src/worker.js`).
-- Every push to `main` runs the tests and deploys `placeholder/`. The Astro build is not deployed there.
+- The Deploy workflow runs the tests and deploys `placeholder/`. It runs only when the owner starts it by hand, so a merge to `main` does not go live. The Astro build is not deployed there.
 - The placeholder stays until the site goes live.
 
 ### At the release: the host
