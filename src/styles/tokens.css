@@ -1,0 +1,40 @@
+/* The color tokens of sudo-hire docs/DESIGN.md, with the same names and values. */
+:root {
+  --burgundy: #5E1B2B;
+  --burgundy-ink: #F4E8EA;
+  --page: #F7F5F2;
+  --panel: #FFFFFF;
+  --sunk: #EEEBE6;
+  --ink: #1E2230;
+  --ink-2: #4F5361;
+  --ink-3: #62666F;
+  --rule: #DCD7D0;
+  --ok: #2B6648;
+  --no: #A63F2A;
+  --unk: #5F636C;
+  --warn-bg: #FBEEE9;
+  --focus: #8A2E44;
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --burgundy: #6A2133;
+    --burgundy-ink: #F6E9EC;
+    --page: #1D1B1F;
+    --panel: #29262B;
+    --sunk: #242126;
+    --ink: #ECE8EA;
+    --ink-2: #B7B1B6;
+    --ink-3: #A49EA4;
+    --rule: #3A363C;
+    --ok: #7CC29E;
+    --no: #EE8B74;
+    --unk: #A9A4AA;
+    --warn-bg: #3A2522;
+    --focus: #E59AAE;
+    color-scheme: dark;
+  }
+}
