@@ -1,14 +1,17 @@
 name: Deploy
 
-# Tests the site and deploys it to Cloudflare Workers on every push to main.
+# Tests the site and deploys it to Cloudflare Workers.
+#
+# It runs only when started by hand (Actions, Deploy, Run workflow), so a merge to main
+# does not go live. To deploy on every push to main again, add back:
+#   push:
+#     branches: [main]
 #
 # wrangler.jsonc says which folder goes live. For now it is ./placeholder.
 #
 # The workflow needs two repository secrets: CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID.
 
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 concurrency:

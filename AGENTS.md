@@ -53,13 +53,13 @@ When the site and these files disagree, stop and ask. Do not guess.
 
 - Every commit goes through a pull request, never straight to `main`.
 - The one exception: a commit that changes only markdown files can go straight to `main`.
-- A push to `main` deploys the site. So a merged pull request goes live.
+- A push to `main` does not deploy. The owner starts each deploy by hand.
 - Never push to `main` outside that exception, and never merge your own pull request. These rules hold even when GitHub would allow it.
 
 ## Deploy
 
 - Cloudflare Workers serves the site on sudohire.dev and www.sudohire.dev. `wrangler.jsonc` holds the config.
-- The Deploy workflow runs the tests and deploys on every push to `main`.
+- The Deploy workflow runs the tests and deploys. It runs only when the owner starts it by hand, from the Actions tab. A merge to `main` does not go live.
 - It needs two repository secrets: `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`. The token needs Workers Scripts Write on the account and Workers Routes Write on the sudohire.dev zone.
 - Cloudflare Web Analytics stays off for sudohire.dev. Its beacon would load before consent. After each deploy, the workflow fails if the live page serves a script.
 
