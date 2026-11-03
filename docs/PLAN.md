@@ -18,10 +18,10 @@ Every phase is test first: the failing test is committed, then the code. One com
    - `npm run build` builds `dist/`. `npm run build:consent` builds `dist-consent/` with a test measurement ID. `npm run check` runs both builds and every test.
    - CI runs `npm run check` on every pull request and every push to `main`. It installs Chromium for Playwright.
    - The placeholder, its tests and its Workers deploy keep working.
-   Tests: the site builds; the home page has its heading; every page has a title; no page makes a request to another origin before consent (Playwright); axe passes on every page, in light and dark.
+   Tests: the site builds; the home page has its heading; every page has a title; no page makes a request to another site before consent (Playwright); axe passes on every page, in light and dark.
 
 3. **Design**, led by the owner with Impeccable. Tokens from `DESIGN.md` of sudo-hire, self hosted type if any, layout, light and dark, navigation, page shell.
-   Tests: the shell is on every page (navigation, one `main`, one `h1`, footer); every navigation link resolves; axe passes in light and dark; no sideways scroll at 320px; every focus stop shows the focus ring; the text and UI color pairs meet WCAG contrast in both modes; every font file is self hosted with its license; no request to another origin.
+   Tests: the shell is on every page (navigation, one `main`, one `h1`, footer); every navigation link resolves; axe passes in light and dark; no sideways scroll at 320px; every focus stop shows the focus ring; the text and UI color pairs meet WCAG contrast in both modes; every font file is self hosted with its license; no request to another site.
 
 4. **Content:** the pages of `SCOPE.md`, in the words of the app.
    - Each page records the sudo-hire version it was checked against.
@@ -35,7 +35,7 @@ Every phase is test first: the failing test is committed, then the code. One com
    - With no `PUBLIC_GA_MEASUREMENT_ID`, nothing changes: no banner, no button, no script.
    - The second build (`dist-consent/`) uses a test ID.
    Tests (Vitest): an invalid ID fails the build; the consent store reads, writes and clears the choice, and degrades when storage is missing; `dist/` has no script and no Google address; every `dist-consent/` page has the banner and no external script; `dist-consent/` ships no `.js` file.
-   Tests (Playwright, on `dist-consent/`, with Google routed to an empty answer): the banner shows on every page with no request to another origin; Accept loads `gtag.js` only, and is remembered on the next page; Decline loads nothing, now or on the next page; the footer button withdraws the choice and the banner shows again; Accept and Decline have the same size and style; the banner links to `/privacy/`; it covers nothing at the page end and fits 320px; it passes axe in light and dark.
+   Tests (Playwright, on `dist-consent/`, with Google routed to an empty answer): the banner shows on every page with no request to another site; Accept loads `gtag.js` only, and is remembered on the next page; Decline loads nothing, now or on the next page; the footer button withdraws the choice and the banner shows again; Accept and Decline have the same size and style; the banner links to `/privacy/`; it covers nothing at the page end and fits 320px; it passes axe in light and dark.
 
 7. **Deploy.** The Publish workflow, the server script, the two `.htaccess` files, `docs/DEPLOYMENT.md` and a redirect check script.
    - On a green `main`, Publish builds with the measurement ID from the repository variable and force pushes `dist/` to the `deploy` branch.
