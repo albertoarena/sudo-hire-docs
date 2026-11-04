@@ -212,3 +212,35 @@ td:last-child, th:last-child { padding-right: 0; }
 @media (max-width: 700px) {
   .settings > div { grid-template-columns: minmax(0, 1fr); }
 }
+
+/* The mark of the app before the name, in the ink of the strip. */
+.strip .name { display: inline-flex; align-items: center; gap: 9px; }
+.mark { width: 20px; height: 20px; flex: none; }
+
+/* The theme toggle: the moon in light, the sun in dark. */
+.theme {
+  order: 3; display: grid; place-items: center; width: 32px; height: 32px; padding: 0;
+  border: 0.5px solid color-mix(in srgb, var(--burgundy-ink) 35%, transparent); border-radius: 8px;
+  background: transparent; color: var(--burgundy-ink); cursor: pointer;
+}
+.theme[hidden] { display: none; }
+.theme:hover { background: color-mix(in srgb, var(--burgundy-ink) 12%, transparent); }
+.theme svg { width: 16px; height: 16px; }
+.theme .sun, .theme[aria-pressed="true"] .moon { display: none; }
+.theme[aria-pressed="true"] .sun { display: block; }
+
+/* The section in view, in the contents. */
+.contents a[aria-current="location"] { color: var(--ink); font-weight: 600; }
+
+/* The header stays at the top from 700px. Under 700px it is too tall to keep. */
+@media (min-width: 700px) {
+  header { position: sticky; top: 0; z-index: 5; }
+  h2[id] { scroll-margin-top: 132px; }
+  .page.has-contents .contents { top: 132px; }
+}
+
+@media (max-width: 700px) {
+  .strip .name { flex-basis: auto; flex: 1; }
+  .theme { order: 1; }
+  .groups { order: 2; flex-basis: 100%; }
+}
