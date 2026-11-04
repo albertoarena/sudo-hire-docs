@@ -176,17 +176,17 @@ The palette is the palette of the app, with the same names and the same values. 
 - **Focus Rose** (`focus`): the focus ring on the page.
 
 ### Stamp inks (semantic)
-- **Admitted Green** (`ok`), **Refused Red** (`no`) and **Unknown Grey** (`unk`): the inks of the entry stamp. The site defines them but does not use them yet. They wait for the stamp, which is not designed yet.
+- **Admitted Green** (`ok`), **Refused Red** (`no`) and **Unknown Grey** (`unk`): the inks of the entry stamp, on How it works.
 
 ### Neutral
 - **Visa Page** (`page`): the ground of every page.
-- **Panel White** (`panel`): the page row under the strip, and the skip link.
-- **Sunk Paper** (`sunk`): the empty screenshot frame.
+- **Panel White** (`panel`): the page row under the strip, notes, and the skip link.
+- **Sunk Paper** (`sunk`): the empty screenshot frame, and code.
 - **Ink** (`ink`): headings, body text, links and the answer.
 - **Ink 2** (`ink-2`): the links in the page row and in the contents, the bold part of the tagline, and the footer.
 - **Ink 3** (`ink-3`): the checked-against note and its dot, the tagline, captions, the contents title, and link underlines at rest.
 - **Rule** (`rule`): every hairline, and the scrollbar.
-- **Warning Wash** (`warn-bg`): defined, not used yet.
+- **Warning Wash** (`warn-bg`): the ground of a warning.
 
 **The Three Inks Rule.** Green, red and grey mean admitted, refused and unknown. Use them only for eligibility and source health. Never use them for decoration.
 
@@ -310,17 +310,37 @@ A hairline above, 15px `ink-2`. "Made by Alberto Arena" links to albertoarena.it
 
 The site has no animation. With `prefers-reduced-motion: reduce`, all transitions and animations are off.
 
-### Not designed yet, phase 4
+### Settings list
 
-The content of the pages will need these parts. None of them exists yet. Phase 4 designs them, except the consent banner.
+Each pane of the app is an h2 with the pane name, then the pane intro of the app as a paragraph. A definition list follows. Each row has the label of the app on the left, in weight 600, in a 12rem column. On the right: what it does, then the default in 15px `ink-2`. Rows sit between 0.5px hairlines. Under 700px the label sits above the text.
 
-- **Settings sections with app labels:** each pane of the app as a section, with its labels in the words of the app.
-- **The sources table.**
-- **Install steps:** numbered steps, with the numbers in a margin column.
-- **Notes and warnings.**
-- **Code:** inline code and code blocks.
-- **The stamp, drawn in HTML:** the entry stamp of the app at page scale, for the pages that explain eligibility.
-- **The consent banner and the "Analytics settings" button in the footer:** phase 6, not phase 4.
+### Steps
+
+A numbered list with the numbers in a 2.4rem margin column, weight 650 in `ink-3`. Each step sits between hairlines. A step can have an h3 at body size, for the heading of a screen of the app.
+
+### Tables
+
+The sources and the source errors. 15px text, a header row in `ink-2` weight 600, and a hairline under each row. The table sits in a box that scrolls sideways, so the page never does.
+
+### Notes and warnings
+
+A note sets text apart by tone: `panel`, a hairline border and radius 8px. A warning uses `warn-bg`. Neither has a colored stripe. A note also holds the text of a notification of the app.
+
+### Code
+
+Inline code is mono at 0.88em, on `sunk`, with radius 4px. A code block is mono 14px on `sunk`, radius 8px, and scrolls sideways. A code block that scrolls takes the focus, so a keyboard can scroll it.
+
+### The stamp
+
+The entry stamp of the app, drawn in HTML: two lines in tracked capitals, the place (15px, 700) above the verdict (13px, 600). A 1.5px border in the ink, radius 4px, turned -1.5 degrees. Green (`ok`) admits, red (`no`) refuses, grey (`unk`) with a dashed border does not know. The sizes are larger than in the app, because no text on the site is under 13px. It has `role="img"` and a label, for example "Stamp: IT, Admitted". Only How it works uses it, to explain eligibility.
+
+### External links in text
+
+A link to another site opens a new tab. It carries the external link icon after the label and the hidden text "(opens in a new tab)". The Download button carries the icon too.
+
+### Not designed yet
+
+- **The consent banner and the "Analytics settings" button in the footer:** phase 6.
 
 ## Do's and Don'ts
 
