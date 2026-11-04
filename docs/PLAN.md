@@ -28,8 +28,10 @@ Every phase is test first: the failing test is committed, then the code. One com
    - Each settings section uses the pane name and the labels of the app.
    Tests: each page has its title, its description and one canonical on `https://sudohire.dev`; each page has its key copy (for example each settings pane name, each source name with its "via" attribution); no placeholder text ("TODO", "lorem"); no em or en dash in a page or a tracked markdown file; every external link opens in a new tab and says so; `/privacy/` and `/help/` exist, because the app links to them.
 
-5. **SEO basics:** `robots.txt`, the sitemap, the 404 page, Open Graph tags and the link preview image.
-   Tests: `robots.txt` blocks nothing and names the sitemap; the sitemap lists every page once, on `https://sudohire.dev`, and not the 404; the 404 page is `noindex`, has no canonical and links home; each page has a unique description; the Open Graph and Twitter tags are set; the preview image is a PNG and its size matches its tags.
+5. **SEO basics:** `robots.txt`, the sitemap, `llms.txt`, the 404 page, Open Graph tags and the link preview image.
+   - `llms.txt` gives AI tools a short map of the site: what Sudo Hire is, then each page with its link and its description. It is built from the same page list as the sitemap.
+   - The preview image is the placeholder card (`placeholder/og.png`), copied to `public/og.png`.
+   Tests: `robots.txt` blocks nothing and names the sitemap; the sitemap lists every page once, on `https://sudohire.dev`, and not the 404; `llms.txt` starts with the name and the summary, lists every page once with the description of the page, and not the 404; the 404 page is `noindex`, has no canonical and links home; each page has a unique description; the Open Graph and Twitter tags are set; the preview image is a PNG and its size matches its tags.
 
 6. **GA4 and the consent gate.**
    - With no `PUBLIC_GA_MEASUREMENT_ID`, nothing changes: no banner, no button, no script.
