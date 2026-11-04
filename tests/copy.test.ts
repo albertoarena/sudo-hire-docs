@@ -39,10 +39,12 @@ describe('/', () => {
 describe('/install/', () => {
   const text = textOf('install');
 
-  it('names the two downloads and how to choose', () => {
+  it('gives the system requirements of the release', () => {
+    expect(text).toContain('Apple silicon');
     expect(text).toContain('arm64');
-    expect(text).toContain('x64');
+    expect(text).toContain('macOS 12 Monterey or later');
     expect(text).toContain('About This Mac');
+    expect(text).not.toContain('x64');
   });
 
   it('follows the four steps of the first run', () => {
