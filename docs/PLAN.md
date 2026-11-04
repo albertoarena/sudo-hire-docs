@@ -26,7 +26,7 @@ Every phase is test first: the failing test is committed, then the code. One com
 4. **Content:** the pages of `SCOPE.md`, in the words of the app.
    - Each page records the sudo-hire version it was checked against.
    - Each settings section uses the pane name and the labels of the app.
-   Tests: each page has its title, its description and one canonical on `https://sudohire.dev`; each page has its key copy (for example each settings pane name, each source name with its "via" attribution and its terms link); no placeholder text ("TODO", "lorem"); no em or en dash in a page or a tracked markdown file; every external link opens in a new tab and says so; `/privacy/` and `/help/` exist, because the app links to them.
+   Tests: each page has its title, its description and one canonical on `https://sudohire.dev`; each page has its key copy (for example each settings pane name, each source name with its "via" attribution); no placeholder text ("TODO", "lorem"); no em or en dash in a page or a tracked markdown file; every external link opens in a new tab and says so; `/privacy/` and `/help/` exist, because the app links to them.
 
 5. **SEO basics:** `robots.txt`, the sitemap, the 404 page, Open Graph tags and the link preview image.
    Tests: `robots.txt` blocks nothing and names the sitemap; the sitemap lists every page once, on `https://sudohire.dev`, and not the 404; the 404 page is `noindex`, has no canonical and links home; each page has a unique description; the Open Graph and Twitter tags are set; the preview image is a PNG and its size matches its tags.

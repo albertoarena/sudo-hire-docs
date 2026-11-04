@@ -42,7 +42,7 @@ The site documents what the released app does. Nothing more.
 | How it works | `/how-it-works/` | The scan every 5 minutes, the filters, the entry stamp, the summary notification, and the New, Saved and Applied tabs. |
 | Install and first run | `/install/` | System requirements, the DMG, the first run (country, keywords, work mode, the first scan), the menu bar icon and its badge. |
 | Settings | `/settings/` | One section for each settings pane, in the order of the app: Where you work, Jobs, Pay, Notifications, Sources, Companies, Privacy, Troubleshooting. |
-| Sources | `/sources/` | Each job board and each career page provider, with its attribution ("via <source>") and a link to its terms. |
+| Sources | `/sources/` | Each job board and each career page provider, with its attribution ("via <source>") and how often the app reads it. Names only: no link to the source or its terms. Decided by the owner on 2026-11-04. |
 | Privacy | `/privacy/` | This site: the consent gate and GA4. A short summary of the app, with a link to `PRIVACY.md`. |
 | Help | `/help/` | The questions of the Troubleshooting pane, how to read the log, and how to report a problem (a GitHub issue on sudo-hire). |
 | Not found | `/404.html` | A short page with a link home. |
