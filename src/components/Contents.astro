@@ -1,0 +1,14 @@
+---
+// "On this page": the sections of a page. Right column from 1100px, inline above the text below that.
+interface Props {
+  sections: { id: string; title: string }[];
+}
+
+const { sections } = Astro.props;
+---
+<nav class="contents" aria-label="On this page">
+  <p class="contents-title">On this page</p>
+  <ul>
+    {sections.map((section) => <li><a href={`#${section.id}`}>{section.title}</a></li>)}
+  </ul>
+</nav>

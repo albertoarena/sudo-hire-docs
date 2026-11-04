@@ -1,0 +1,66 @@
+---
+import '../styles/site.css';
+import ExternalIcon from '../components/ExternalIcon.astro';
+import { groupOf, groups } from '../data/nav';
+
+interface Props {
+  title: string;
+  home?: boolean;
+}
+
+const { title, home = false } = Astro.props;
+const path = Astro.url.pathname;
+const current = groupOf(path);
+const documentTitle = home ? 'Sudo Hire' : `${title} | Sudo Hire`;
+const utm = 'utm_source=sudohire.dev&utm_medium=referral&utm_campaign=footer';
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{documentTitle}</title>
+  </head>
+  <body>
+    <a class="skip" href="#content">Skip to the content</a>
+    <header>
+      <div class="strip">
+        <div class="wrap">
+          <a class="name" href="/">Sudo Hire</a>
+          <nav class="groups" aria-label="Questions">
+            <ul>
+              {groups.map((group) => (
+                <li><a href={group.pages[0].href} aria-current={group === current ? 'true' : undefined}>{group.label}</a></li>
+              ))}
+            </ul>
+          </nav>
+        </div>
+      </div>
+      {current && (
+        <div class="pages">
+          <div class="wrap">
+            <nav aria-label="Pages">
+              <ul>
+                {current.pages.map((page) => (
+                  <li><a href={page.href} aria-current={page.href === path ? 'page' : undefined}>{page.label}</a></li>
+                ))}
+              </ul>
+            </nav>
+            <p class="checked">Written against main. To check against the release.</p>
+          </div>
+        </div>
+      )}
+    </header>
+    <main id="content" tabindex="-1">
+      <div class="wrap">
+        <slot />
+      </div>
+    </main>
+    <footer>
+      <div class="wrap">
+        <p>Made by <a href={`https://albertoarena.it/?${utm}`} target="_blank" rel="noopener">Alberto Arena<ExternalIcon /><span class="visually-hidden"> (opens in a new tab)</span></a>.</p>
+        <p><a href={`https://sudoplay.dev/?${utm}`} target="_blank" rel="noopener">sudoplay.dev<ExternalIcon /><span class="visually-hidden"> (opens in a new tab)</span></a></p>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,25 @@
+---
+import Base from '../layouts/Base.astro';
+import Contents from '../components/Contents.astro';
+
+// The eight panes of the settings window, in the order of the app.
+const sections = [
+  { id: 'where-you-work', title: 'Where you work' },
+  { id: 'jobs', title: 'Jobs' },
+  { id: 'pay', title: 'Pay' },
+  { id: 'notifications', title: 'Notifications' },
+  { id: 'sources', title: 'Sources' },
+  { id: 'companies', title: 'Companies' },
+  { id: 'privacy', title: 'Privacy' },
+  { id: 'troubleshooting', title: 'Troubleshooting' },
+];
+---
+<Base title="Settings">
+  <div class="page has-contents">
+    <div>
+      <h1>What does each setting do?</h1>
+      <Contents sections={sections} />
+      {sections.map((section) => <h2 id={section.id}>{section.title}</h2>)}
+    </div>
+  </div>
+</Base>
