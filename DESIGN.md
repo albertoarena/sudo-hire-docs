@@ -250,7 +250,7 @@ The site is flat. It has no shadows. Depth comes from three tones and from hairl
 
 ## Shapes
 
-Small, soft corners, like the controls of the app. 4px for the focus ring. 6px for the skip link. 8px for the primary button and the theme toggle. 10px for the screenshot frame. The dot of the checked-against note is a 7px circle.
+Small, soft corners, like the controls of the app. 4px for the focus ring. 6px for the skip link. 8px for the primary button, the theme toggle and the consent buttons. 10px for the screenshot frame. The dot of the checked-against note is a 7px circle.
 
 Lines are 0.5px hairlines in `rule`. The one exception is the empty screenshot frame. It has a 1px dashed border in `ink-3`, because it marks a place to fill.
 
@@ -320,7 +320,9 @@ The site has no animation.
 
 ### Scripts
 
-The site ships no `.js` file and loads no script from another site. Two short inline scripts do the work: one in the head sets the chosen theme before the first paint, and one at the end of the body runs the theme toggle and marks the section in view. Without them, the site follows the system theme, and the contents are plain links. With `prefers-reduced-motion: reduce`, all transitions and animations are off.
+The site ships no `.js` file and loads no script from another site. Two short inline scripts do the work: one in the head sets the chosen theme before the first paint, and one at the end of the body runs the theme toggle and marks the section in view. Without them, the site follows the system theme, and the contents are plain links.
+
+A build with a measurement ID adds a third inline script: the consent banner. It loads Google Analytics only after Accept. Without it, the banner never shows and nothing loads. With `prefers-reduced-motion: reduce`, all transitions and animations are off.
 
 ### Settings list
 
@@ -350,9 +352,18 @@ The entry stamp of the app, drawn in HTML: two lines in tracked capitals, the pl
 
 A link to another site opens a new tab. It carries the external link icon after the label and the hidden text "(opens in a new tab)". The Download button carries the icon too.
 
-### Not designed yet
+### The consent banner
 
-- **The consent banner and the "Analytics settings" button in the footer:** phase 6.
+It shows only in a build with a GA4 measurement ID, and only until the reader chooses. It is fixed to the bottom of the window, on `panel`, with a 0.5px hairline in `rule` above it and no shadow. The text column is as wide as the page text.
+
+- **Title:** "Can this site count your visit?" in 17px weight 600. The banner is a region with this name.
+- **Text:** 15px `ink-2`. It says that nothing loads from Google before a choice, what Accept does, and that there is no advertising. It links to the privacy page.
+- **Buttons:** "Decline", then "Accept". They have the same size and the same look: no fill, a 1px border in `ink-2`, `ink` text at 15px weight 600, radius 8px, at least 44px high, in two equal columns. Neither one is the primary button. Hover underlines the label.
+- **Space:** while the banner shows, the footer grows by the height of the banner, so the banner covers nothing at the end of a page.
+
+### Analytics settings
+
+In a build with a measurement ID, the footer has an "Analytics settings" button. It looks like the footer links. It clears the choice and reloads the page, so the banner asks again and nothing from Google stays on the page.
 
 ## Do's and Don'ts
 

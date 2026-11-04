@@ -1,6 +1,8 @@
 ---
 import '../styles/site.css';
+import ConsentBanner from '../components/ConsentBanner.astro';
 import ExternalIcon from '../components/ExternalIcon.astro';
+import { gaMeasurementId } from '../data/analytics';
 import { groupOf, groups, pages } from '../data/nav';
 
 interface Props {
@@ -94,8 +96,10 @@ const utm = 'utm_source=sudohire.dev&utm_medium=referral&utm_campaign=footer';
       <div class="wrap">
         <p>Made by <a href={`https://albertoarena.it/?${utm}`} target="_blank" rel="noopener">Alberto Arena<ExternalIcon /><span class="visually-hidden"> (opens in a new tab)</span></a>.</p>
         <p><a href={`https://sudoplay.dev/?${utm}`} target="_blank" rel="noopener">sudoplay.dev<ExternalIcon /><span class="visually-hidden"> (opens in a new tab)</span></a></p>
+        {gaMeasurementId && <p><button type="button" class="consent-settings" data-consent-reset>Analytics settings</button></p>}
       </div>
     </footer>
+    {gaMeasurementId && <ConsentBanner />}
     <script is:inline>
       // The theme toggle: light, dark, then system. The icon shows the current
       // mode. Light and dark stay in the browser. System removes the choice.
