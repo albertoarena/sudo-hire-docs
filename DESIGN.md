@@ -164,11 +164,11 @@ The site is flat and quiet. Depth comes from tone (page, panel, sunk) and from 0
 - The title of a page is a question, and the answer comes first.
 - One primary button per view, in burgundy.
 - The system font of the Mac, as in the app. No web font.
-- Light and dark follow the system. Every token has a dark value.
+- Light and dark follow the system, until the reader chooses one with the theme toggle. Every token has a dark value.
 
 ## Colors
 
-The palette is the palette of the app, with the same names and the same values. `src/styles/tokens.css` defines each token on `:root`. It defines the same names again for dark mode, under `@media (prefers-color-scheme: dark)`. The `-dark` keys in the frontmatter are those dark values. A unit test checks that every token exists in both modes and that the text pairs reach 4.5:1.
+The palette is the palette of the app, with the same names and the same values. `src/styles/tokens.css` defines each token on `:root`. It defines the same names again for dark mode, under `@media (prefers-color-scheme: dark)` for `:root:not([data-theme="light"])`, and once more for `:root[data-theme="dark"]`, the choice of the reader. The `-dark` keys in the frontmatter are those dark values. A unit test checks that every token exists in both modes and that the text pairs reach 4.5:1.
 
 ### Primary
 - **Passport Burgundy** (`burgundy`): the strip and the one primary button. Text selection uses it at 30% over the page.
@@ -231,10 +231,12 @@ The main area has 56px above and 88px below. Under 700px it has 36px above and 6
 
 The order of the shell from top to bottom:
 
-1. **The strip** (burgundy, at least 60px tall): "Sudo Hire" on the left, the four question groups on the right. Under 700px the name takes its own line, and the groups form a grid of two columns.
+1. **The strip** (burgundy, at least 60px tall): the mark and "Sudo Hire" on the left, the four question groups and the theme toggle on the right. Under 700px the name and the toggle share the first line, and the groups form a grid of two columns below.
 2. **The page row** (panel white, at least 48px tall, a hairline below): the pages of the open group, then the checked-against note on the right. It wraps on narrow screens. The 404 page has no page row.
 3. **Main**: the page.
 4. **The footer**: a hairline above it, two links.
+
+From 700px the strip and the page row stay at the top of the window while the page scrolls. Under 700px they scroll away, because they are too tall to keep.
 
 The body is a flex column at least as tall as the window, so the footer stays at the bottom.
 
@@ -248,7 +250,7 @@ The site is flat. It has no shadows. Depth comes from three tones and from hairl
 
 ## Shapes
 
-Small, soft corners, like the controls of the app. 4px for the focus ring. 6px for the skip link. 8px for the primary button. 10px for the screenshot frame. The dot of the checked-against note is a 7px circle.
+Small, soft corners, like the controls of the app. 4px for the focus ring. 6px for the skip link. 8px for the primary button and the theme toggle. 10px for the screenshot frame. The dot of the checked-against note is a 7px circle.
 
 Lines are 0.5px hairlines in `rule`. The one exception is the empty screenshot frame. It has a 1px dashed border in `ink-3`, because it marks a place to fill.
 
@@ -262,6 +264,8 @@ Burgundy, with the guilloche of the app as an inline SVG background. The guilloc
 - **Hover:** the underline shows at 50%.
 - **Current group:** weight 600 and the full underline.
 - **Focus:** the ring is `burgundy-ink`, not `focus`, so it shows on burgundy.
+- **The mark:** the menu bar mark of the app, 20px, in `burgundy-ink`, 9px before the name.
+- **The theme toggle:** a 32px button with a hairline border in `burgundy-ink` at 35%. It shows a moon in light and a sun in dark. Its name is "Dark theme", and `aria-pressed` says if dark is on. A click picks the other theme, and the browser stores the choice. With no choice, the system decides. The button shows only when its script runs.
 
 ### The page row
 
@@ -283,7 +287,7 @@ A figure for a screenshot of the app, with a caption below in 14px `ink-3`. Unti
 
 ### On this page
 
-The list of the sections of a page. Under 1100px it sits above the text, between two hairlines, in two columns. From 1100px it moves to the right column. There it has one column, a hairline above only, and sticks 24px from the top. The title "On this page" is 13px `ink-3`. The links are 15px `ink-2`, with no underline at rest. Hover turns a link `ink` and underlines it.
+The list of the sections of a page. Under 1100px it sits above the text, between two hairlines, in two columns. From 1100px it moves to the right column. There it has one column, a hairline above only, and sticks 24px from the top. The title "On this page" is 13px `ink-3`. The links are 15px `ink-2`, with no underline at rest, and each one has the exact text of its heading. Hover turns a link `ink` and underlines it. The section in view is `ink` and weight 600, with `aria-current="location"`. It is the last heading above the top of the reading area, or the last one at the end of the page.
 
 ### Links
 
@@ -292,6 +296,10 @@ Links in text are `ink` with a 1px underline in `ink-3`, 0.22em below the text. 
 ### External link icon
 
 The external link icon of the app: 16 by 16 view box, stroke 1.4, round caps and joins, no fill, `currentColor`. It shows at 12px after the label, with a 6px gap. A link with the icon opens a new tab and tells screen readers so in hidden text.
+
+### Favicon
+
+The app icon of sudo-hire (`resources/icons/app-icon.svg`) as `favicon.svg`, and a 180px PNG of it as `apple-touch-icon.png`. The icon is the project's art under `TRADEMARK.md` of sudo-hire, not under the MIT license of the code.
 
 ### Footer
 
@@ -308,7 +316,11 @@ A hairline above, 15px `ink-2`. "Made by Alberto Arena" links to albertoarena.it
 
 ### Motion
 
-The site has no animation. With `prefers-reduced-motion: reduce`, all transitions and animations are off.
+The site has no animation.
+
+### Scripts
+
+The site ships no `.js` file and loads no script from another site. Two short inline scripts do the work: one in the head sets the chosen theme before the first paint, and one at the end of the body runs the theme toggle and marks the section in view. Without them, the site follows the system theme, and the contents are plain links. With `prefers-reduced-motion: reduce`, all transitions and animations are off.
 
 ### Settings list
 

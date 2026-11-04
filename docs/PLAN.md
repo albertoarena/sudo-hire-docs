@@ -34,7 +34,7 @@ Every phase is test first: the failing test is committed, then the code. One com
 6. **GA4 and the consent gate.**
    - With no `PUBLIC_GA_MEASUREMENT_ID`, nothing changes: no banner, no button, no script.
    - The second build (`dist-consent/`) uses a test ID.
-   Tests (Vitest): an invalid ID fails the build; the consent store reads, writes and clears the choice, and degrades when storage is missing; `dist/` has no script and no Google address; every `dist-consent/` page has the banner and no external script; `dist-consent/` ships no `.js` file.
+   Tests (Vitest): an invalid ID fails the build; the consent store reads, writes and clears the choice, and degrades when storage is missing; `dist/` ships no `.js` file, loads no script from another site and has no Google address; every `dist-consent/` page has the banner and no external script; `dist-consent/` ships no `.js` file.
    Tests (Playwright, on `dist-consent/`, with Google routed to an empty answer): the banner shows on every page with no request to another site; Accept loads `gtag.js` only, and is remembered on the next page; Decline loads nothing, now or on the next page; the footer button withdraws the choice and the banner shows again; Accept and Decline have the same size and style; the banner links to `/privacy/`; it covers nothing at the page end and fits 320px; it passes axe in light and dark.
 
 7. **Deploy.** The Publish workflow, the server script, the two `.htaccess` files, `docs/DEPLOYMENT.md` and a redirect check script.
