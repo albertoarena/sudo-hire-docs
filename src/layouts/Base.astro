@@ -1,21 +1,25 @@
 ---
 import '../styles/site.css';
 import ExternalIcon from '../components/ExternalIcon.astro';
-import { groupOf, groups } from '../data/nav';
+import { groupOf, groups, pages } from '../data/nav';
 
 interface Props {
   title: string;
-  description: string;
+  // Only for a page outside the navigation. A page in it takes its description from src/data/nav.ts.
+  description?: string;
   home?: boolean;
   // The version of the app that the page was checked against (src/data/app.ts).
   checked?: string;
-  // False for the 404 page: it has no canonical.
-  canonical?: boolean;
+  // False for the 404 page: noindex, and no canonical.
+  indexed?: boolean;
 }
 
-const { title, description, home = false, checked, canonical = true } = Astro.props;
+const { title, home = false, checked, indexed = true } = Astro.props;
 const path = Astro.url.pathname;
+const description = pages.find((page) => page.href === path)?.description ?? Astro.props.description ?? '';
 const canonicalUrl = new URL(path, Astro.site).href;
+// The link preview image: placeholder/og.png, copied to public/. Source in art/og-card.html.
+const image = { url: new URL('/og.png', Astro.site).href, width: 1200, height: 630, alt: 'Sudo Hire: “Remote” often does not mean remote from anywhere. A job stamped IT, admitted.' };
 const current = groupOf(path);
 const documentTitle = home ? 'Sudo Hire' : `${title} | Sudo Hire`;
 const utm = 'utm_source=sudohire.dev&utm_medium=referral&utm_campaign=footer';
@@ -33,7 +37,17 @@ const utm = 'utm_source=sudohire.dev&utm_medium=referral&utm_campaign=footer';
       // The theme that the reader chose, before the first paint. With no choice, the system decides.
       try { const theme = localStorage.getItem('theme'); if (theme === 'light' || theme === 'dark') document.documentElement.dataset.theme = theme; } catch {}
     </script>
-    {canonical && <link rel="canonical" href={canonicalUrl} />}
+    {indexed ? <link rel="canonical" href={canonicalUrl} /> : <meta name="robots" content="noindex" />}
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Sudo Hire" />
+    {indexed && <meta property="og:url" content={canonicalUrl} />}
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image.url} />
+    <meta property="og:image:width" content={String(image.width)} />
+    <meta property="og:image:height" content={String(image.height)} />
+    <meta property="og:image:alt" content={image.alt} />
+    <meta name="twitter:card" content="summary_large_image" />
   </head>
   <body>
     <a class="skip" href="#content">Skip to the content</a>

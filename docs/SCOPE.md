@@ -47,7 +47,7 @@ The site documents what the released app does. Nothing more.
 | Help | `/help/` | The questions of the Troubleshooting pane, how to read the log, and how to report a problem (a GitHub issue on sudo-hire). |
 | Not found | `/404.html` | A short page with a link home. |
 
-Also: `robots.txt`, `sitemap.xml`, Open Graph tags and a link preview image.
+Also: `robots.txt`, `sitemap.xml`, `llms.txt`, Open Graph tags and a link preview image. `llms.txt` lets AI tools read a short map of the site.
 
 `/privacy/` and `/help/` are fixed. The app opens these two addresses ("Read the privacy policy" in the Privacy pane, and the help link in Troubleshooting). The other paths are this plan's proposal.
 
@@ -98,7 +98,7 @@ The app has no telemetry. The site has GA4 behind consent. These are two differe
 1. **The screenshot on Home.** No screenshot exists yet. It must show real jobs, not invented companies or salaries (`PRODUCT.md`), and it must come from the release build. Who takes it, and with which data?
 2. **The download link.** Decided on 2026-11-04: the button links to the latest GitHub release, so it never names a version. Version 1 needs macOS 12 Monterey or later and ships for Apple silicon (arm64) only.
 3. **`TRADEMARK.md` in sudo-hire.** It covers "the design, layout and written copy of the site" on sudohire.dev. The page text is CC BY 4.0, so sudo-hire drops "written copy" from that line. This is a change in sudo-hire, not here.
-4. **The link preview image.** The placeholder has one (`art/og-card.html`). The app icon is M9 work. Does the site reuse the placeholder card, or wait for the icon?
+4. **The link preview image.** Decided in phase 5: the site reuses the placeholder card (`art/og-card.html`, rendered to `placeholder/og.png`). A new card can replace it later.
 5. **The type.** `DESIGN.md` uses the system font. The site may keep it, so no font file is needed, or pick a self hosted face. Decided in the design phase.
 6. **The GA4 property.** The owner creates it later. The ID goes in the repository variable `PUBLIC_GA_MEASUREMENT_ID`.
 7. **The host steps.** Which account, which folder and the cron line. Written in phase 7, done by the owner at the release.
