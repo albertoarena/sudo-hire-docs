@@ -1,0 +1,85 @@
+---
+// The analytics banner. Base renders it only when a measurement ID is set.
+// It names no Google address: the tag loads only through loadAnalytics,
+// after an explicit accept.
+//
+// Its script also runs Analytics settings in the footer. Astro inlines one
+// small script with no shared chunk, so the page loads no script file.
+import { gaMeasurementId } from '../data/analytics';
+---
+<section id="consent" class="consent" aria-labelledby="consent-title" data-measurement-id={gaMeasurementId} hidden>
+  <div class="wrap">
+    <div class="consent-copy">
+      <p id="consent-title" class="consent-title">Can this site count your visit?</p>
+      <p>Nothing loads from Google until you choose. If you accept, Google Analytics counts the pages that people read. There is no advertising. Read more on the <a href="/privacy/">privacy page</a>.</p>
+    </div>
+    <div class="consent-actions">
+      <button type="button" class="consent-button" data-consent="declined">Decline</button>
+      <button type="button" class="consent-button" data-consent="accepted">Accept</button>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { ACCEPTED, DECLINED, analyticsAllowed, clearConsent, readConsent, shouldShowBanner, storeConsent } from '../scripts/consent';
+  import { loadAnalytics } from '../scripts/analytics';
+
+  const storage = (() => {
+    try {
+      return window.localStorage;
+    } catch {
+      return undefined;
+    }
+  })();
+
+  const banner = document.getElementById('consent');
+  if (banner) {
+    const id = banner.dataset.measurementId ?? '';
+    const root = document.documentElement;
+    const stored = readConsent(storage);
+
+    // A reader who accepted before loads analytics on this page too. Every
+    // other reader never reaches the loader, so Google is never contacted.
+    if (analyticsAllowed(stored)) loadAnalytics({ id });
+
+    // While the banner shows, the footer keeps room for it (--banner-space),
+    // so it hides nothing at the end of a page.
+    const makeRoom = () => root.style.setProperty('--banner-space', `${banner.offsetHeight}px`);
+    const observer = new ResizeObserver(makeRoom);
+
+    const close = () => {
+      observer.disconnect();
+      banner.remove();
+      root.style.removeProperty('--banner-space');
+    };
+
+    if (shouldShowBanner(stored)) {
+      // The banner is built hidden and shown here. A reader who chose never
+      // sees it flash, and with no script it never shows.
+      banner.hidden = false;
+      makeRoom();
+      observer.observe(banner);
+    } else {
+      close();
+    }
+
+    for (const button of banner.querySelectorAll<HTMLButtonElement>('[data-consent]')) {
+      button.addEventListener('click', () => {
+        const choice = button.dataset.consent === ACCEPTED ? ACCEPTED : DECLINED;
+        storeConsent(storage, choice);
+        if (analyticsAllowed(choice)) loadAnalytics({ id });
+        close();
+      });
+    }
+  }
+
+  // Analytics settings, in the footer. It clears the choice and reloads the
+  // page: clearing does not stop a gtag that already runs, but a new page
+  // starts with no choice and loads nothing.
+  for (const button of document.querySelectorAll('[data-consent-reset]')) {
+    button.addEventListener('click', () => {
+      clearConsent(storage);
+      window.location.reload();
+    });
+  }
+</script>

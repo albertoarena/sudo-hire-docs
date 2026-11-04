@@ -115,9 +115,34 @@ p { margin: 0 0 16px; text-wrap: pretty; }
 .home { grid-template-columns: minmax(0, 1fr) minmax(0, 300px); align-items: start; gap: 48px 96px; }
 
 footer { border-top: 0.5px solid var(--rule); font-size: 15px; color: var(--ink-2); }
-footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0 32px; padding-top: 14px; padding-bottom: 26px; }
+/* --banner-space: the height of the consent banner while it shows, so it hides nothing. */
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0 32px; padding-top: 14px; padding-bottom: calc(26px + var(--banner-space, 0px)); }
 footer p { margin: 0; }
 footer a { display: inline-flex; align-items: center; gap: 6px; padding: 11px 0; }
+/* Analytics settings looks like the footer links. */
+footer .consent-settings {
+  padding: 11px 0; border: 0; background: none; color: var(--ink);
+  font: inherit; text-decoration: underline; text-decoration-thickness: 1px;
+  text-decoration-color: var(--ink-3); text-underline-offset: 0.22em; cursor: pointer;
+}
+footer .consent-settings:hover { text-decoration-thickness: 2px; text-decoration-color: currentColor; }
+
+/* The consent banner: fixed to the bottom, flat, with a hairline above. */
+.consent { position: fixed; inset: auto 0 0 0; z-index: 20; background: var(--panel); border-top: 0.5px solid var(--rule); font-size: 15px; line-height: 1.5; }
+.consent[hidden] { display: none; }
+.consent .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 32px; padding-top: 16px; padding-bottom: 16px; }
+.consent-copy { flex: 1 1 24rem; max-width: 68ch; color: var(--ink-2); }
+.consent-copy p { margin: 0; }
+.consent-title { color: var(--ink); font-size: 17px; font-weight: 600; }
+/* Two equal columns: both buttons have the same width. */
+.consent-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+/* One class for both: Decline looks the same as Accept, and neither is primary. */
+.consent-button {
+  min-height: 44px; padding: 10px 18px; border: 1px solid var(--ink-2); border-radius: 8px;
+  background: transparent; color: var(--ink); font: inherit; font-weight: 600; line-height: 1.2; cursor: pointer;
+}
+.consent-button:hover { text-decoration: underline; }
+@media (max-width: 700px) { .consent-actions { width: 100%; } }
 .ext { width: 12px; height: 12px; flex: none; }
 
 /* "On this page": inline above the text, then a right column from 1100px. */
