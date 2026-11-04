@@ -18,35 +18,46 @@ test('the header shows the mark of the app', async ({ page }) => {
   await expect(page.getByRole('banner').locator('.name svg.mark')).toHaveCount(1);
 });
 
-test('the theme follows the system until the reader chooses one', async ({ page }) => {
+test('the theme toggle cycles light, dark and system', async ({ page }) => {
   await page.emulateMedia({ colorScheme: 'light' });
   await page.goto('/install/');
-  const toggle = page.getByRole('button', { name: 'Dark theme' });
+  const toggle = page.locator('header button.theme');
   const background = () => page.evaluate(() => getComputedStyle(document.body).backgroundColor);
 
-  await expect(toggle).toHaveAttribute('aria-pressed', 'false');
+  await expect(toggle).toHaveAccessibleName('Theme: system');
   expect(await background()).toBe('rgb(247, 245, 242)');
 
   await toggle.click();
-  await expect(toggle).toHaveAttribute('aria-pressed', 'true');
+  await expect(toggle).toHaveAccessibleName('Theme: light');
+  expect(await background()).toBe('rgb(247, 245, 242)');
+
+  await toggle.click();
+  await expect(toggle).toHaveAccessibleName('Theme: dark');
   expect(await background()).toBe('rgb(29, 27, 31)');
 
   await page.goto('/help/');
-  await expect(page.getByRole('button', { name: 'Dark theme' })).toHaveAttribute('aria-pressed', 'true');
+  await expect(toggle).toHaveAccessibleName('Theme: dark');
   expect(await background()).toBe('rgb(29, 27, 31)');
+
+  await toggle.click();
+  await expect(toggle).toHaveAccessibleName('Theme: system');
+  expect(await background()).toBe('rgb(247, 245, 242)');
+  expect(await page.evaluate(() => localStorage.getItem('theme'))).toBeNull();
 });
 
-test('a light choice wins over a dark system', async ({ page }) => {
+test('a light choice wins over a dark system, and system follows it', async ({ page }) => {
   await page.emulateMedia({ colorScheme: 'dark' });
   await page.goto('/');
-  const toggle = page.getByRole('button', { name: 'Dark theme' });
+  const toggle = page.locator('header button.theme');
+  const background = () => page.evaluate(() => getComputedStyle(document.body).backgroundColor);
 
-  await expect(toggle).toHaveAttribute('aria-pressed', 'true');
+  await expect(toggle).toHaveAccessibleName('Theme: system');
+  expect(await background()).toBe('rgb(29, 27, 31)');
+
   await toggle.click();
   await page.reload();
-
-  await expect(page.getByRole('button', { name: 'Dark theme' })).toHaveAttribute('aria-pressed', 'false');
-  expect(await page.evaluate(() => getComputedStyle(document.body).backgroundColor)).toBe('rgb(247, 245, 242)');
+  await expect(toggle).toHaveAccessibleName('Theme: light');
+  expect(await background()).toBe('rgb(247, 245, 242)');
 });
 
 test('the contents mark the section in view', async ({ page }) => {
