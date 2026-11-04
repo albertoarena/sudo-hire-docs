@@ -130,7 +130,7 @@ footer a { display: inline-flex; align-items: center; gap: 6px; padding: 11px 0;
 @media (min-width: 1100px) {
   .page.has-contents { grid-template-columns: minmax(0, 68ch) 220px; }
   .page.has-contents > div { display: contents; }
-  .page.has-contents h1, .page.has-contents .answer, .page.has-contents h2 { grid-column: 1; }
+  .page.has-contents > div > :not(.contents) { grid-column: 1; }
   .page.has-contents .contents { grid-column: 2; grid-row: 1 / span 20; align-self: start; position: sticky; top: 24px; margin: 8px 0 0; border-bottom: 0; }
   .page.has-contents .contents ul { columns: 1; }
 }
@@ -151,4 +151,96 @@ footer a { display: inline-flex; align-items: center; gap: 6px; padding: 11px 0;
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+
+/* Content parts. */
+ul, ol { margin: 0 0 16px; padding-left: 1.3em; }
+li { margin: 0 0 6px; }
+li::marker { color: var(--ink-3); }
+
+code { font-family: var(--mono); font-size: 0.88em; padding: 1px 5px; border-radius: 4px; background: var(--sunk); }
+pre { margin: 0 0 16px; padding: 14px 16px; overflow-x: auto; border-radius: 8px; background: var(--sunk); font-family: var(--mono); font-size: 14px; line-height: 1.55; }
+pre code { padding: 0; background: none; font-size: inherit; }
+
+main a.external:not(.button) .ext { display: inline-block; margin-left: 6px; vertical-align: -1px; }
+.button .ext { margin-left: -2px; }
+
+/* A note sets text apart by tone, not by a stripe. A warning uses the warning wash. */
+.note { margin: 0 0 16px; padding: 14px 18px; border-radius: 8px; background: var(--panel); border: 0.5px solid var(--rule); }
+.note.warn { background: var(--warn-bg); }
+.note > :last-child { margin-bottom: 0; }
+
+/* The settings of a pane: the label of the app, then what it does and its default. */
+.settings { margin: 0 0 16px; border-bottom: 0.5px solid var(--rule); }
+.settings > div { display: grid; grid-template-columns: 12rem minmax(0, 1fr); gap: 4px 24px; padding: 14px 0; border-top: 0.5px solid var(--rule); }
+.settings dt { font-weight: 600; }
+.settings dd { margin: 0; }
+.settings dd > :last-child { margin-bottom: 0; }
+.settings dd p { margin-bottom: 8px; }
+.settings .default { font-size: 15px; color: var(--ink-2); }
+
+/* Numbered steps, with the numbers in a margin column. */
+.steps { list-style: none; padding: 0; counter-reset: step; }
+.steps > li { counter-increment: step; display: grid; grid-template-columns: 2.4rem minmax(0, 1fr); margin: 0; padding: 14px 0; border-top: 0.5px solid var(--rule); }
+.steps > li:last-child { border-bottom: 0.5px solid var(--rule); }
+.steps > li::before { content: counter(step); font-weight: 650; color: var(--ink-3); }
+.steps > li > div > :last-child { margin-bottom: 0; }
+.steps h3 { margin: 0 0 4px; font-size: 17px; line-height: 1.6; }
+
+/* A table of facts: the sources, the errors. */
+.table { margin: 0 0 16px; overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 15px; }
+th, td { padding: 10px 16px 10px 0; text-align: left; vertical-align: top; border-bottom: 0.5px solid var(--rule); }
+th { font-weight: 600; color: var(--ink-2); }
+td:last-child, th:last-child { padding-right: 0; }
+
+/* The entry stamp: tracked capitals belong to it alone. */
+.stamps { display: grid; gap: 14px; margin: 8px 0 20px; padding: 0; list-style: none; }
+.stamps li { display: grid; grid-template-columns: 7.5rem minmax(0, 1fr); align-items: center; gap: 16px; margin: 0; }
+.stamps .stamp { justify-self: start; }
+.stamp {
+  display: inline-flex; flex-direction: column; align-items: center; flex: none;
+  padding: 3px 9px 4px; border: 1.5px solid currentColor; border-radius: 4px;
+  text-transform: uppercase; line-height: 1.2; transform: rotate(-1.5deg);
+}
+.stamp-place { font-size: 15px; font-weight: 700; letter-spacing: 0.08em; }
+.stamp-word { font-size: 13px; font-weight: 600; letter-spacing: 0.06em; }
+.stamp-ok { color: var(--ok); }
+.stamp-no { color: var(--no); }
+.stamp-unk { color: var(--unk); border-style: dashed; }
+
+@media (max-width: 700px) {
+  .settings > div { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* The mark of the app before the name, in the ink of the strip. */
+.strip .name { display: inline-flex; align-items: center; gap: 9px; }
+.mark { width: 20px; height: 20px; flex: none; }
+
+/* The theme toggle: a sun for light, a moon for dark, a screen for system. */
+.theme {
+  order: 3; display: grid; place-items: center; width: 32px; height: 32px; padding: 0;
+  border: 0.5px solid color-mix(in srgb, var(--burgundy-ink) 35%, transparent); border-radius: 8px;
+  background: transparent; color: var(--burgundy-ink); cursor: pointer;
+}
+.theme[hidden] { display: none; }
+.theme:hover { background: color-mix(in srgb, var(--burgundy-ink) 12%, transparent); }
+.theme svg { width: 16px; height: 16px; }
+.theme svg { display: none; }
+.theme[data-mode="light"] .sun, .theme[data-mode="dark"] .moon, .theme[data-mode="system"] .screen { display: block; }
+
+/* The section in view, in the contents. */
+.contents a[aria-current="location"] { color: var(--ink); font-weight: 600; }
+
+/* The header stays at the top from 700px. Under 700px it is too tall to keep. */
+@media (min-width: 700px) {
+  header { position: sticky; top: 0; z-index: 5; }
+  h2[id] { scroll-margin-top: 132px; }
+  .page.has-contents .contents { top: 132px; }
+}
+
+@media (max-width: 700px) {
+  .strip .name { flex-basis: auto; flex: 1; }
+  .theme { order: 1; }
+  .groups { order: 2; flex-basis: 100%; }
 }

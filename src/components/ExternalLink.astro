@@ -1,0 +1,12 @@
+---
+// A link to another site. It opens a new tab and tells screen readers so.
+import ExternalIcon from './ExternalIcon.astro';
+
+interface Props {
+  href: string;
+  class?: string;
+}
+
+const { href, class: className } = Astro.props;
+---
+<a class:list={['external', className]} href={href} target="_blank" rel="noopener"><slot /><ExternalIcon /><span class="visually-hidden"> (opens in a new tab)</span></a>

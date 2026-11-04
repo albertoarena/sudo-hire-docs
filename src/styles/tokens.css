@@ -19,8 +19,10 @@
   color-scheme: light;
 }
 
+/* Dark follows the system, unless the reader chose light. The theme toggle
+   sets data-theme on the html element. The same dark tokens are written twice. */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --burgundy: #6A2133;
     --burgundy-ink: #F6E9EC;
     --page: #1D1B1F;
@@ -37,4 +39,22 @@
     --focus: #E59AAE;
     color-scheme: dark;
   }
+}
+
+:root[data-theme="dark"] {
+  --burgundy: #6A2133;
+  --burgundy-ink: #F6E9EC;
+  --page: #1D1B1F;
+  --panel: #29262B;
+  --sunk: #242126;
+  --ink: #ECE8EA;
+  --ink-2: #B7B1B6;
+  --ink-3: #A49EA4;
+  --rule: #3A363C;
+  --ok: #7CC29E;
+  --no: #EE8B74;
+  --unk: #A9A4AA;
+  --warn-bg: #3A2522;
+  --focus: #E59AAE;
+  color-scheme: dark;
 }

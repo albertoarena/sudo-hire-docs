@@ -10,7 +10,15 @@ function tokens(block: string): Record<string, string> {
 }
 
 const light = tokens(css.split('@media')[0]);
-const dark = tokens(css.slice(css.indexOf('prefers-color-scheme: dark')));
+const darkBlocks = css.slice(css.indexOf('prefers-color-scheme: dark')).split('[data-theme="dark"]');
+const dark = tokens(darkBlocks[0]);
+
+// The dark tokens are written twice: for a dark system, and for a reader who
+// chooses dark. The two blocks must stay the same.
+it('writes the same dark tokens for the system and for the choice', () => {
+  expect(darkBlocks).toHaveLength(2);
+  expect(tokens(darkBlocks[1])).toEqual(dark);
+});
 
 function luminance(hex: string): number {
   const [r, g, b] = [1, 3, 5].map((i) => {

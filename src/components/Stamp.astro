@@ -1,0 +1,12 @@
+---
+// The entry stamp of the app, at page scale: the place, then the verdict.
+// Green admits, red refuses, grey does not know. Use it only for eligibility.
+interface Props {
+  place: string;
+  word: string;
+  kind: 'ok' | 'no' | 'unk';
+}
+
+const { place, word, kind } = Astro.props;
+---
+<span class={`stamp stamp-${kind}`} role="img" aria-label={`Stamp: ${place}, ${word}`}><span class="stamp-place">{place}</span><span class="stamp-word">{word}</span></span>

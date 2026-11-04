@@ -1,8 +1,61 @@
 ---
 import Base from '../layouts/Base.astro';
+import Contents from '../components/Contents.astro';
+import { checkedAgainst } from '../data/app';
+
+// The job boards of the app, in the order of the Sources pane.
+const boards = [
+  { name: 'LaraJobs', hours: 2 },
+  { name: 'Jobicy', hours: 6 },
+  { name: 'Remotive', hours: 6 },
+  { name: 'Himalayas', hours: 2 },
+  { name: 'We Work Remotely', hours: 2 },
+];
+const sections = [
+  { id: 'boards', title: 'Which job boards does it read?' },
+  { id: 'career-pages', title: 'Which career pages can it read?' },
+  { id: 'also-on', title: 'Why does a job say “also on”?' },
+  { id: 'terms', title: 'Why is a source read so rarely?' },
+  { id: 'errors', title: 'What if a source cannot be read?' },
+];
 ---
-<Base title="Sources">
-  <div class="page">
-    <h1>Where do the jobs come from?</h1>
+<Base title="Sources" description="The job boards and career pages that Sudo Hire reads, how often it reads each one, and how a job names its source." checked={checkedAgainst}>
+  <div class="page has-contents">
+    <div>
+      <h1>Where do the jobs come from?</h1>
+      <div class="answer">
+        <p>Sudo Hire reads two kinds of source: five public job boards, and the career pages of the companies that you add. Every job says where it comes from, with “via” and the name of the source.</p>
+      </div>
+      <Contents sections={sections} />
+
+      <h2 id="boards">Which job boards does it read?</h2>
+      <div class="table">
+        <table>
+          <thead>
+            <tr><th scope="col">Source</th><th scope="col">In the list</th><th scope="col">Read at most</th></tr>
+          </thead>
+          <tbody>
+            {boards.map((board) => (
+              <tr><td>{board.name}</td><td>via {board.name}</td><td>every {board.hours} hours</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p>Every board is on by default. No board needs an account or a key. To turn a board off, use the switch in Settings, Sources.</p>
+
+      <h2 id="career-pages">Which career pages can it read?</h2>
+      <p>Sudo Hire reads the career pages of companies that use Greenhouse, Lever, Ashby or Personio. The list of companies starts empty. Add a company in Settings, Companies: choose the provider, then type the company name as it is in the link of its career page.</p>
+      <p>Sudo Hire reads each career page at most every 6 hours. A job from a career page names the company, for example “via Acme careers”. In Settings, Sources, all the career pages are one row: Company careers.</p>
+
+      <h2 id="also-on">Why does a job say “also on”?</h2>
+      <p>When two sources list the same job, it shows once. The job names its first source with “via”, and each other source with “also on”. A job stays in the list while one of its sources is on.</p>
+
+      <h2 id="terms">Why is a source read so rarely?</h2>
+      <p>Each source is read no more often than its terms allow. The terms also ask that each job names its source and keeps its own link, so Sudo Hire does both. The list shows names only, with no logos.</p>
+      <p>The names of the sources belong to their owners. Sudo Hire is not affiliated with any of them.</p>
+
+      <h2 id="errors">What if a source cannot be read?</h2>
+      <p>The bottom of the list names the source and the error, for example “We Work Remotely: certificate error”. “Details” opens Settings, Sources. Sudo Hire tries again by itself. The <a href="/help/#source-errors">help page</a> explains each error.</p>
+    </div>
   </div>
 </Base>
