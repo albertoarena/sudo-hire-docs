@@ -6,7 +6,7 @@ import { checkedAgainst } from '../data/app';
 import { downloadUrl, securityUrl } from '../data/links';
 
 const sections = [
-  { id: 'download', title: 'The download' },
+  { id: 'download', title: 'What you need' },
   { id: 'install', title: 'Install' },
   { id: 'first-run', title: 'The first run' },
   { id: 'menu-bar', title: 'The menu bar' },
@@ -17,21 +17,18 @@ const sections = [
     <div>
       <h1>How do I install Sudo Hire?</h1>
       <div class="answer">
-        <p>Download the DMG for your Mac, drag Sudo Hire to Applications and open it. A short first run asks for your country and your keywords. Then it runs the first scan.</p>
+        <p>Download the DMG, drag Sudo Hire to Applications and open it. A short first run asks for your country and your keywords. Then it runs the first scan.</p>
       </div>
       <Contents sections={sections} />
 
-      <h2 id="download">Which download do I need?</h2>
-      <p>The <ExternalLink href={downloadUrl}>latest release</ExternalLink> has one DMG for each kind of Mac:</p>
-      <ul>
-        <li><code>arm64</code> for a Mac with Apple silicon (M1 and later).</li>
-        <li><code>x64</code> for a Mac with an Intel processor.</li>
-      </ul>
-      <p>To find out which Mac you have, open the Apple menu and choose About This Mac.</p>
+      <h2 id="download">What do I need?</h2>
+      <p>A Mac with Apple silicon (M1 and later) and macOS 12 Monterey or later. There is no version for a Mac with an Intel processor.</p>
+      <p>To find out which Mac you have, open the Apple menu and choose About This Mac. On a Mac with Apple silicon, the Chip line names an Apple chip, for example Apple M1.</p>
+      <p>The <ExternalLink href={downloadUrl}>latest release</ExternalLink> has one DMG, with <code>arm64</code> in its name.</p>
 
       <h2 id="install">How do I install it?</h2>
       <ol class="steps">
-        <li><div><p>Download the DMG for your Mac from the <ExternalLink href={downloadUrl}>latest release</ExternalLink>.</p></div></li>
+        <li><div><p>Download the DMG from the <ExternalLink href={downloadUrl}>latest release</ExternalLink>.</p></div></li>
         <li><div><p>Open the DMG and drag Sudo Hire to Applications.</p></div></li>
         <li><div><p>Open Sudo Hire from Applications. It lives in the menu bar and has no Dock icon.</p></div></li>
       </ol>
