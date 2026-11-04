@@ -217,7 +217,7 @@ td:last-child, th:last-child { padding-right: 0; }
 .strip .name { display: inline-flex; align-items: center; gap: 9px; }
 .mark { width: 20px; height: 20px; flex: none; }
 
-/* The theme toggle: the moon in light, the sun in dark. */
+/* The theme toggle: a sun for light, a moon for dark, a screen for system. */
 .theme {
   order: 3; display: grid; place-items: center; width: 32px; height: 32px; padding: 0;
   border: 0.5px solid color-mix(in srgb, var(--burgundy-ink) 35%, transparent); border-radius: 8px;
@@ -226,8 +226,8 @@ td:last-child, th:last-child { padding-right: 0; }
 .theme[hidden] { display: none; }
 .theme:hover { background: color-mix(in srgb, var(--burgundy-ink) 12%, transparent); }
 .theme svg { width: 16px; height: 16px; }
-.theme .sun, .theme[aria-pressed="true"] .moon { display: none; }
-.theme[aria-pressed="true"] .sun { display: block; }
+.theme svg { display: none; }
+.theme[data-mode="light"] .sun, .theme[data-mode="dark"] .moon, .theme[data-mode="system"] .screen { display: block; }
 
 /* The section in view, in the contents. */
 .contents a[aria-current="location"] { color: var(--ink); font-weight: 600; }

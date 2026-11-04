@@ -265,7 +265,7 @@ Burgundy, with the guilloche of the app as an inline SVG background. The guilloc
 - **Current group:** weight 600 and the full underline.
 - **Focus:** the ring is `burgundy-ink`, not `focus`, so it shows on burgundy.
 - **The mark:** the menu bar mark of the app, 20px, in `burgundy-ink`, 9px before the name.
-- **The theme toggle:** a 32px button with a hairline border in `burgundy-ink` at 35%. It shows a moon in light and a sun in dark. Its name is "Dark theme", and `aria-pressed` says if dark is on. A click picks the other theme, and the browser stores the choice. With no choice, the system decides. The button shows only when its script runs.
+- **The theme toggle:** a 32px button with a hairline border in `burgundy-ink` at 35%. A click moves to the next mode: light, dark, then system. The icon shows the current mode: a sun, a moon or a screen. Its name says the mode, for example "Theme: system". The browser stores light and dark. System removes the choice, and the page follows the system again. The button shows only when its script runs.
 
 ### The page row
 
