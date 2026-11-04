@@ -1,8 +1,70 @@
 ---
 import Base from '../layouts/Base.astro';
+import Contents from '../components/Contents.astro';
+import ExternalLink from '../components/ExternalLink.astro';
+import { checkedAgainst } from '../data/app';
+import { downloadUrl, securityUrl } from '../data/links';
+
+const sections = [
+  { id: 'download', title: 'The download' },
+  { id: 'install', title: 'Install' },
+  { id: 'first-run', title: 'The first run' },
+  { id: 'menu-bar', title: 'The menu bar' },
+];
 ---
-<Base title="Install and first run">
-  <div class="page">
-    <h1>How do I install Sudo Hire?</h1>
+<Base title="Install and first run" description="How to download and install Sudo Hire on a Mac, and what the first run asks." checked={checkedAgainst}>
+  <div class="page has-contents">
+    <div>
+      <h1>How do I install Sudo Hire?</h1>
+      <div class="answer">
+        <p>Download the DMG for your Mac, drag Sudo Hire to Applications and open it. A short first run asks for your country and your keywords. Then it runs the first scan.</p>
+      </div>
+      <Contents sections={sections} />
+
+      <h2 id="download">Which download do I need?</h2>
+      <p>The <ExternalLink href={downloadUrl}>latest release</ExternalLink> has one DMG for each kind of Mac:</p>
+      <ul>
+        <li><code>arm64</code> for a Mac with Apple silicon (M1 and later).</li>
+        <li><code>x64</code> for a Mac with an Intel processor.</li>
+      </ul>
+      <p>To find out which Mac you have, open the Apple menu and choose About This Mac.</p>
+
+      <h2 id="install">How do I install it?</h2>
+      <ol class="steps">
+        <li><div><p>Download the DMG for your Mac from the <ExternalLink href={downloadUrl}>latest release</ExternalLink>.</p></div></li>
+        <li><div><p>Open the DMG and drag Sudo Hire to Applications.</p></div></li>
+        <li><div><p>Open Sudo Hire from Applications. It lives in the menu bar and has no Dock icon.</p></div></li>
+      </ol>
+      <div class="note warn">
+        <p>Each release is signed and notarized, so macOS opens it with no warning. If macOS warns you about Sudo Hire, do not open it. Report it as a <ExternalLink href={securityUrl}>security problem</ExternalLink>.</p>
+      </div>
+
+      <h2 id="first-run">What does the first run ask?</h2>
+      <p>The first run opens in a window called “Welcome to Sudo Hire”. It has four steps.</p>
+      <ol class="steps">
+        <li><div>
+          <h3>Jobs you can take, from where you live</h3>
+          <p>A short welcome. Choose “Start”.</p>
+        </div></li>
+        <li><div>
+          <h3>Where do you work from?</h3>
+          <p>Choose your country. Sudo Hire reads it from your Mac, so check it and change it if it is wrong. Each job shows if it accepts people in this country. Choose “Next”.</p>
+        </div></li>
+        <li><div>
+          <h3>What do you look for?</h3>
+          <p>Add your keywords, for example laravel. Press Return after each one. The first keywords also name the groups in the notification. Then choose the work mode: Remote, Hybrid or On-site. Choose “Run first scan”.</p>
+        </div></li>
+        <li><div>
+          <h3>First scan</h3>
+          <p>Sudo Hire reads the sources. This takes about a minute the first time. Each source shows waiting, reading, then done. Choose “Open the list”.</p>
+        </div></li>
+      </ol>
+      <p>Nothing is stored until you choose “Run first scan”. If you close the window before that, the first run opens again at the next start. The first scan sends no notification.</p>
+      <p>You can change each answer later in the <a href="/settings/">settings</a>.</p>
+
+      <h2 id="menu-bar">Where is Sudo Hire after the first run?</h2>
+      <p>Sudo Hire is an icon in the menu bar. Next to it, a number counts the new jobs that you have not seen. Click the icon to open the list. <a href="/how-it-works/#list">How it works</a> explains the list.</p>
+      <p>The bottom of the list has Settings and Quit. Sudo Hire scans only while it runs.</p>
+    </div>
   </div>
 </Base>

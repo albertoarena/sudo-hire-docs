@@ -1,8 +1,92 @@
 ---
 import Base from '../layouts/Base.astro';
+import Contents from '../components/Contents.astro';
+import Stamp from '../components/Stamp.astro';
+import { checkedAgainst } from '../data/app';
+
+const sections = [
+  { id: 'scan', title: 'The scan' },
+  { id: 'filters', title: 'The filters' },
+  { id: 'stamp', title: 'The stamp' },
+  { id: 'list', title: 'The list' },
+  { id: 'notification', title: 'The notification' },
+  { id: 'updates', title: 'Updates' },
+];
 ---
-<Base title="How it works">
-  <div class="page">
-    <h1>How does Sudo Hire find my jobs?</h1>
+<Base title="How it works" description="How Sudo Hire scans the sources, filters the jobs, stamps each job and sends one summary notification." checked={checkedAgainst}>
+  <div class="page has-contents">
+    <div>
+      <h1>How does Sudo Hire find my jobs?</h1>
+      <div class="answer">
+        <p>While Sudo Hire runs, it starts a scan every 5 minutes. It keeps only the jobs that accept people in your country and match your filters. When there is something new, it sends one summary notification.</p>
+      </div>
+      <Contents sections={sections} />
+
+      <h2 id="scan">When does Sudo Hire look for new jobs?</h2>
+      <p>A scan starts every 5 minutes while the app runs. Each scan reads only the sources that are due. A source is read no more often than its terms allow, so most sources are read every 2 or 6 hours. The <a href="/sources/">sources page</a> gives the time for each one.</p>
+      <p>A source that fails does not stop the others. Once a day, the scan also reads the exchange rates of the European Central Bank.</p>
+      <p>Sudo Hire keeps a job for 30 days after a source last listed it. Saved and applied jobs stay until you remove them.</p>
+
+      <h2 id="filters">Which jobs does it keep?</h2>
+      <p>A job must pass every filter of your <a href="/settings/">settings</a>:</p>
+      <ul>
+        <li>Its work mode is one that you chose.</li>
+        <li>It accepts people in your country.</li>
+        <li>Its timezone is within the time difference, when you set one.</li>
+        <li>It matches at least one of your keywords, and none of the keywords to exclude.</li>
+        <li>Its pay is at least your minimum, when you set one.</li>
+        <li>Its contract type and seniority are ones that you chose.</li>
+        <li>It was posted within the time that you chose.</li>
+        <li>Its company is not hidden, and its source is on.</li>
+      </ul>
+      <p>When a job does not state its work mode, contract type or seniority, it passes that filter. A job with no salary shows with “?”, unless you set Salary not stated to Hide.</p>
+      <p>When two sources list the same job, it shows once, with “also on” and the name of the other source.</p>
+
+      <h2 id="stamp">What does the stamp on a job mean?</h2>
+      <p>Every job carries an entry stamp, like a stamp in a passport. The stamp says if the job admits people from your country.</p>
+      <ul class="stamps">
+        <li><Stamp place="IT" word="Admitted" kind="ok" /> Green: the job admits you.</li>
+        <li><Stamp place="Location" word="Not stated" kind="unk" /> Grey: the job does not say.</li>
+        <li><Stamp place="Not" word="Admitted" kind="no" /> Red: the job does not admit you.</li>
+      </ul>
+      <p>A green stamp shows your country code when the job lists your country, or when it accepts people from anywhere. When the job lists a region that includes your country, the stamp shows the region, for example “Europe”.</p>
+      <p>A grey stamp marks a job that does not say where you can work from. By default these jobs are in the “Location not stated” group, at the end of New. Check before you apply. They are never in a notification.</p>
+      <p>A red stamp shows on a saved or applied job that does not admit you now. It also shows in the preview of the settings and the first run. Other jobs that do not admit you are not in the list.</p>
+
+      <h2 id="list">What are New, Saved and Applied?</h2>
+      <p>Click the Sudo Hire icon in the menu bar to open the list. It has three tabs, each with its count:</p>
+      <ul>
+        <li>“New” holds the jobs that match, newest first.</li>
+        <li>“Saved” holds the jobs that you saved. A saved job stays after 30 days.</li>
+        <li>“Applied” holds the jobs that you marked as applied.</li>
+      </ul>
+      <p>Each job shows its title, its stamp, its company, its source as “via” and the source name, and its age. The pay line shows the salary as the job states it, and the converted amount after ≈. “?” means that the salary is not stated or cannot be compared. “OTE” means on-target earnings.</p>
+      <p>Each job has these buttons:</p>
+      <ul>
+        <li>“Save” moves the job to Saved.</li>
+        <li>“Not for me” hides the job. You do not see it again. Settings, Jobs, lists the hidden jobs and can show one again.</li>
+        <li>“Applied” moves the job to Applied.</li>
+        <li>“Apply” opens the apply link in your browser. It does not mark the job as applied.</li>
+      </ul>
+      <p>Press the active button again to move the job back to New. After each change, “Undo” shows for a few seconds.</p>
+      <p>A dot marks a job that you have not seen. When you close the list, the jobs that it showed become seen. The number next to the menu bar icon counts the new jobs that you have not seen.</p>
+      <p>The bottom of the list gives the time of the last scan and of the next one, then Settings and Quit.</p>
+
+      <h2 id="notification">When do I get a notification?</h2>
+      <p>Sudo Hire sends one summary for all the new jobs that match, for example:</p>
+      <p class="note">6 new jobs: 4 Laravel, 2 PHP</p>
+      <p>The summary groups the jobs by your keywords, in the order of your keywords. Click it to open the list.</p>
+      <ul>
+        <li>It comes at most every 2 hours. Change this in Settings, Notifications.</li>
+        <li>No notification comes when no new job matches.</li>
+        <li>The first scan sends no notification. The next summary has only newer jobs.</li>
+        <li>Jobs in the “Location not stated” group are never in a notification.</li>
+      </ul>
+
+      <h2 id="updates">How does Sudo Hire update?</h2>
+      <p>Sudo Hire checks for a new version when it starts, and then at most once a day. It downloads the new version in the background. Then a notification says, for example:</p>
+      <p class="note">Sudo Hire 1.1.0 is ready. It installs when you quit Sudo Hire.</p>
+      <p>The new version installs when you quit the app. Sudo Hire never restarts itself, and never installs while it runs.</p>
+    </div>
   </div>
 </Base>

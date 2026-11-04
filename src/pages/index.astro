@@ -1,18 +1,20 @@
 ---
 import Base from '../layouts/Base.astro';
+import ExternalLink from '../components/ExternalLink.astro';
+import { checkedAgainst } from '../data/app';
 import { downloadUrl } from '../data/links';
 ---
-<Base title="Sudo Hire" home>
+<Base title="Sudo Hire" description="Sudo Hire is a macOS menu bar app that finds PHP and Laravel jobs you can do from where you live." home checked={checkedAgainst}>
   <div class="page home">
     <div>
       <h1>Sudo Hire</h1>
       <p class="tagline">$ sudo hire <b>--remote-from here</b></p>
       <div class="answer">
-        <p>Sudo Hire is a macOS menu bar app for PHP and Laravel developers. It checks where you can work from, so a developer in Italy does not see a job that is “Remote, US only”.</p>
-        <a class="button" href={downloadUrl}>
+        <p>Sudo Hire is a macOS menu bar app for PHP and Laravel developers. It checks where you can work from, so a developer in Italy does not see a job that is “Remote, US only”. It sends one summary notification when there is something new.</p>
+        <ExternalLink class="button" href={downloadUrl}>
           <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2.5v8" /><path d="M4.5 7 8 10.5 11.5 7" /><path d="M3 13.5h10" /></svg>
           Download for Mac
-        </a>
+        </ExternalLink>
       </div>
     </div>
     <figure class="shot">

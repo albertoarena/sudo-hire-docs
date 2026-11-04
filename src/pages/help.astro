@@ -1,8 +1,81 @@
 ---
 import Base from '../layouts/Base.astro';
+import Contents from '../components/Contents.astro';
+import ExternalLink from '../components/ExternalLink.astro';
+import { checkedAgainst } from '../data/app';
+import { issueUrl, securityUrl } from '../data/links';
+
+const sections = [
+  { id: 'no-new-jobs', title: 'No new jobs for days' },
+  { id: 'certificate-error', title: 'A source shows "Certificate error"' },
+  { id: 'no-notifications', title: 'No notifications' },
+  { id: 'stopped', title: '"Stopped in the background"' },
+  { id: 'source-errors', title: 'Source errors' },
+  { id: 'wrong-job', title: 'A wrong job' },
+  { id: 'log', title: 'The log' },
+  { id: 'report', title: 'Report a problem' },
+];
 ---
-<Base title="Help">
-  <div class="page">
-    <h1>Something does not work. What now?</h1>
+<Base title="Help" description="Answers to common Sudo Hire problems, how to read the log, and how to report a problem." checked={checkedAgainst}>
+  <div class="page has-contents">
+    <div>
+      <h1>Something does not work. What now?</h1>
+      <div class="answer">
+        <p>Open Settings, Troubleshooting. It shows if a source has an error, and it answers the common questions. If that does not help, report a problem.</p>
+      </div>
+      <Contents sections={sections} />
+
+      <h2 id="no-new-jobs">No new jobs for days</h2>
+      <p>A filter is often too strict. In Settings, Jobs, check Posted within and your keywords. In Where you work, a short time difference or “Hide” for Location not stated also removes many jobs.</p>
+      <p>Then check Settings, Sources. A source that is off or has an error gives no jobs.</p>
+
+      <h2 id="certificate-error">A source shows "Certificate error"</h2>
+      <p>The secure connection to the source failed. A network filter or an old certificate list can cause it. Update Sudo Hire. If it continues, report the problem.</p>
+
+      <h2 id="no-notifications">No notifications</h2>
+      <p>Open System Settings, Notifications, Sudo Hire, and allow notifications. Sudo Hire only notifies when new jobs match. It sends no notification after the first scan, and at most one every 2 hours by default.</p>
+
+      <h2 id="stopped">"Stopped in the background"</h2>
+      <p>The part of the app that reads sources stopped. Choose “Quit Sudo Hire” in the menu bar list, then open the app again. Your jobs and settings are safe.</p>
+
+      <h2 id="source-errors">What do the source errors mean?</h2>
+      <p>Settings, Sources, shows each error in the Status column. Sudo Hire tries again by itself, at the time that the Status column gives, or at the next scan.</p>
+      <div class="table">
+        <table>
+          <thead>
+            <tr><th scope="col">Error</th><th scope="col">What happened</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Certificate error</td><td>The secure connection failed. If it continues, update the app.</td></tr>
+            <tr><td>No answer</td><td>The site did not answer.</td></tr>
+            <tr><td>Read error</td><td>Sudo Hire could not read the answer of the site.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="wrong-job">A job is wrong</h2>
+      <p>A job with a wrong country, salary or seniority is a problem in Sudo Hire: report it. A job that is fake or offensive comes from its source: report it to the job board that lists it.</p>
+
+      <h2 id="log">Where is the log?</h2>
+      <p>Sudo Hire writes warnings and errors to a log file, for example a source that could not be read. In Settings, Troubleshooting, choose “Open log folder”. Finder opens the folder of the log.</p>
+
+      <h2 id="report">How do I report a problem?</h2>
+      <ol class="steps">
+        <li><div><p>In Settings, Troubleshooting, choose “Copy diagnostic report”. The button reads “Copied”.</p></div></li>
+        <li><div><p>Choose “Report a problem”. A new issue on sudo-hire opens in your browser. You can also open the <ExternalLink href={issueUrl}>new issue page</ExternalLink> from here.</p></div></li>
+        <li><div><p>Say what you did and what happened. Paste the report.</p></div></li>
+      </ol>
+      <p>The report has the app version, the macOS version and the status of each source. It has no settings, keywords or jobs. It looks like this:</p>
+      <pre tabindex="0"><code>Sudo Hire 1.0.0
+macOS 15.1
+PHP 8.4.1
+
+Sources
+ats: on, last run 2026-11-04T10:05:00+00:00, last success 2026-11-04T10:05:00+00:00, no error
+larajobs: on, last run 2026-11-04T10:05:00+00:00, last success 2026-11-04T08:05:00+00:00, error certificate</code></pre>
+      <div class="note warn">
+        <p>Do not open a public issue for a security problem. Follow <ExternalLink href={securityUrl}>SECURITY.md</ExternalLink> to report it privately.</p>
+      </div>
+    </div>
   </div>
 </Base>

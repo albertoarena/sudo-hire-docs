@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Contents from '../components/Contents.astro';
+import { checkedAgainst } from '../data/app';
 
 // The eight panes of the settings window, in the order of the app.
 const sections = [
@@ -14,12 +15,295 @@ const sections = [
   { id: 'troubleshooting', title: 'Troubleshooting' },
 ];
 ---
-<Base title="Settings">
+<Base title="Settings" description="Each pane of the Sudo Hire settings window: what each setting does and its default." checked={checkedAgainst}>
   <div class="page has-contents">
     <div>
       <h1>What does each setting do?</h1>
+      <div class="answer">
+        <p>Each setting saves as soon as you change it. The window has no Save button. To open it, choose Settings at the bottom of the menu bar list.</p>
+      </div>
       <Contents sections={sections} />
-      {sections.map((section) => <h2 id={section.id}>{section.title}</h2>)}
+
+      <h2 id="where-you-work">Where you work</h2>
+      <p>Jobs must accept people in your country. This pane says where you are and how you want to work.</p>
+      <dl class="settings">
+        <div>
+          <dt>Country</dt>
+          <dd>
+            <p>The country you work from. Type to search all countries.</p>
+            <p class="default">Default: the country you chose at the first run.</p>
+          </dd>
+        </div>
+        <div>
+          <dt>Preview</dt>
+          <dd>
+            <p>How two real jobs look for the country you choose. The preview shows two jobs after the first scan.</p>
+          </dd>
+        </div>
+        <div>
+          <dt>Timezone</dt>
+          <dd>
+            <p>Your timezone. The time difference below compares job timezones with it.</p>
+            <p class="default">Default: read from your Mac.</p>
+          </dd>
+        </div>
+        <div>
+          <dt>Work mode</dt>
+          <dd>
+            <p>Remote, Hybrid and On-site. Select at least one.</p>
+            <p class="default">Default: Remote.</p>
+          </dd>
+        </div>
+        <div>
+          <dt>Location not stated</dt>
+          <dd>
+            <p>Many jobs do not say where you can work from. Choose what the list does with them:</p>
+            <ul>
+              <li>“Show apart from matches” puts them in the “Location not stated” group, at the end of New. They are never in a notification.</li>
+              <li>“Hide” removes them from the list.</li>
+              <li>“Show with matches” shows them with the jobs that match.</li>
+            </ul>
+            <p class="default">Default: Show apart from matches.</p>
+          </dd>
+        </div>
+        <div>
+          <dt>Time difference</dt>
+          <dd>
+            <p>Keeps jobs whose timezone is at most this far from yours. Jobs that do not state a timezone always show. Choose Off, from “Up to 1 hour” to “Up to 6 hours”, or “Custom…” for 0 to 12 hours.</p>
+            <p class="default">Default: Off.</p>
+          </dd>
+        </div>
+      </dl>
+
+      <h2 id="jobs">Jobs</h2>
+      <p>Keywords match the title and tags, as whole words.</p>
+      <dl class="settings">
+        <div>
+          <dt>Include</dt>
+          <dd>
+            <p>A job must match at least one of these keywords. With no keyword, every job matches. Type a keyword and press Return. The notification groups new jobs by these keywords, in this order.</p>
+            <p class="default">Default: none.</p>
+          </dd>
+        </div>
+        <div>
+          <dt>Exclude</dt>
+          <dd>
+            <p>A job that matches one of these keywords is not in the list.</p>
+            <p class="default">Default: none.</p>
+          </dd>
+        </div>
+        <div>
+          <dt>Also match the job description</dt>
+          <dd>
+            <p>The keywords also match the text of the job, not only the title and tags.</p>
+            <p class="default">Default: off.</p>
+          </dd>
+        </div>
+        <div>
+          <dt>Contract</dt>
+          <dd>
+            <p>Full time, Part time and Contract. Select at least one.</p>
+            <p class="default">Default: all three.</p>
+          </dd>
+        </div>
+        <div>
+          <dt>Seniority</dt>
+          <dd>
+            <p>Junior, Mid, Senior and Lead. Select at least one.</p>
+            <p class="default">Default: all four.</p>
+          </dd>
+        </div>
+        <div>
+          <dt>Posted within</dt>
+          <dd>
+            <p>The age of the jobs in the list: 24 hours, 3 days, 7 days, 14 days or 30 days. Jobs are kept for 30 days.</p>
+            <p class="default">Default: 3 days.</p>
+          </dd>
+        </div>
+        <div>
+          <dt>Hide companies</dt>
+          <dd>
+            <p>Companies whose jobs you do not want to see.</p>
+            <p class="default">Default: none.</p>
+          </dd>
+        </div>
+        <div>
+          <dt>Hidden jobs</dt>
+          <dd>
+            <p>The jobs you hid with “Not for me”, newest first. “Show again” moves a job back to New.</p>
+          </dd>
+        </div>
+      </dl>
+
+      <h2 id="pay">Pay</h2>
+      <p>Filters compare converted amounts. The job always shows the original too.</p>
+      <dl class="settings">
+        <div>
+          <dt>Show amounts in</dt>
+          <dd>
+            <p>The currency of converted amounts: EUR, USD or GBP.</p>
+            <p class="default">Default: EUR.</p>
+          </dd>
+        </div>
+        <div>
+          <dt>Minimum per year</dt>
+          <dd>
+            <p>The lowest salary for employee jobs, in the currency above. Leave it empty to show every salary.</p>
+            <p class="default">Default: empty.</p>
+          </dd>
+        </div>
+        <div>
+          <dt>Payments per year</dt>
+          <dd>
+            <p>Sudo Hire multiplies monthly salaries by this number: 12, 13 or 14. Italian offers often quote 13 or 14.</p>
+            <p class="default">Default: 12.</p>
+          </dd>
+        </div>
+        <div>
+          <dt>Minimum per day</dt>
+          <dd>
+            <p>The lowest day rate for contract jobs. Hourly rates count 8 hours a day. Leave it empty to show every rate.</p>
+            <p class="default">Default: empty.</p>
+          </dd>
+        </div>
+        <div>
+          <dt>Salary not stated</dt>
+          <dd>
+            <p>“Show with "?"” keeps jobs with no salary, marked with a question mark. “Hide” removes them.</p>
+            <p class="default">Default: Show with "?".</p>
+          </dd>
+        </div>
+      </dl>
+      <p>The note under the pane gives the date of the exchange rates. Sudo Hire reads the reference rates of the European Central Bank once a day. Amounts marked ≈ are converted.</p>
+
+      <h2 id="notifications">Notifications</h2>
+      <p>One summary, only when there is something new.</p>
+      <dl class="settings">
+        <div>
+          <dt>Notify at most every</dt>
+          <dd>
+            <p>The shortest time between two notifications, from 1 to 24 hours. There is no notification when no new job matches.</p>
+            <p class="default">Default: 2 hours.</p>
+          </dd>
+        </div>
+        <div>
+          <dt>Example</dt>
+          <dd>
+            <p>How the notification looks: “6 new jobs: 4 Laravel, 2 PHP”.</p>
+          </dd>
+        </div>
+      </dl>
+
+      <h2 id="sources">Sources</h2>
+      <p>Each source is read no more often than its terms allow. The table has one row for each source, with four columns.</p>
+      <dl class="settings">
+        <div>
+          <dt>On</dt>
+          <dd>
+            <p>Turns the source on or off.</p>
+            <p class="default">Default: every source is on.</p>
+          </dd>
+        </div>
+        <div>
+          <dt>Source</dt>
+          <dd>
+            <p>The name of the source, and how often Sudo Hire reads it at most. The <a href="/sources/">sources page</a> lists each one.</p>
+          </dd>
+        </div>
+        <div>
+          <dt>Last read</dt>
+          <dd>
+            <p>The time of the last read, or “Not yet”.</p>
+          </dd>
+        </div>
+        <div>
+          <dt>Status</dt>
+          <dd>
+            <p>The number of jobs, or “Next scan” before the first read. After a failure it shows the error and when Sudo Hire tries again. The <a href="/help/">help page</a> explains each error.</p>
+          </dd>
+        </div>
+      </dl>
+
+      <h2 id="companies">Companies</h2>
+      <p>Career pages that Sudo Hire reads directly. Most good jobs are here, not on boards.</p>
+      <dl class="settings">
+        <div>
+          <dt>Add</dt>
+          <dd>
+            <p>Choose the career page provider: Greenhouse, Lever, Ashby or Personio. Then type the company name as it is in the link of its career page, for example acme. Choose Add, or press Return.</p>
+          </dd>
+        </div>
+        <div>
+          <dt>Company</dt>
+          <dd>
+            <p>The name of the company.</p>
+          </dd>
+        </div>
+        <div>
+          <dt>Career page</dt>
+          <dd>
+            <p>The provider and the company name in the link.</p>
+          </dd>
+        </div>
+        <div>
+          <dt>Last read</dt>
+          <dd>
+            <p>The time of the last read, “Next scan” before the first read, or the error. Sudo Hire reads each career page at most every 6 hours.</p>
+          </dd>
+        </div>
+        <div>
+          <dt>Remove</dt>
+          <dd>
+            <p>Removes the company at once.</p>
+          </dd>
+        </div>
+      </dl>
+
+      <h2 id="privacy">Privacy</h2>
+      <p>Everything stays on your Mac. No account, no telemetry. The pane lists what Sudo Hire contacts and what it stores on your Mac.</p>
+      <dl class="settings">
+        <div>
+          <dt>Show data folder in Finder</dt>
+          <dd>
+            <p>Opens Finder with the data file of Sudo Hire selected.</p>
+          </dd>
+        </div>
+        <div>
+          <dt>Read the privacy policy</dt>
+          <dd>
+            <p>Opens the <a href="/privacy/">privacy page</a> of this site in your browser.</p>
+          </dd>
+        </div>
+      </dl>
+
+      <h2 id="troubleshooting">Troubleshooting</h2>
+      <p>Most problems come from one source, or from a filter that is too strict. The pane starts with a note on the sources: “All sources are fine.”, or the source that has an error. “Show sources” opens the Sources pane. Then come four common questions.</p>
+      <dl class="settings">
+        <div>
+          <dt>More answers on the help page</dt>
+          <dd>
+            <p>Opens the <a href="/help/">help page</a> of this site in your browser.</p>
+          </dd>
+        </div>
+        <div>
+          <dt>Open log folder</dt>
+          <dd>
+            <p>Opens the folder of the log file in Finder.</p>
+          </dd>
+        </div>
+        <div>
+          <dt>Copy diagnostic report</dt>
+          <dd>
+            <p>Copies a short report to the clipboard. The report has the app version, the macOS version and the status of each source. It has no settings, keywords or jobs.</p>
+          </dd>
+        </div>
+        <div>
+          <dt>Report a problem</dt>
+          <dd>
+            <p>Opens a new issue on sudo-hire in GitHub, in your browser.</p>
+          </dd>
+        </div>
+      </dl>
     </div>
   </div>
 </Base>

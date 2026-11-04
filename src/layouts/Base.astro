@@ -5,11 +5,17 @@ import { groupOf, groups } from '../data/nav';
 
 interface Props {
   title: string;
+  description: string;
   home?: boolean;
+  // The version of the app that the page was checked against (src/data/app.ts).
+  checked?: string;
+  // False for the 404 page: it has no canonical.
+  canonical?: boolean;
 }
 
-const { title, home = false } = Astro.props;
+const { title, description, home = false, checked, canonical = true } = Astro.props;
 const path = Astro.url.pathname;
+const canonicalUrl = new URL(path, Astro.site).href;
 const current = groupOf(path);
 const documentTitle = home ? 'Sudo Hire' : `${title} | Sudo Hire`;
 const utm = 'utm_source=sudohire.dev&utm_medium=referral&utm_campaign=footer';
@@ -20,6 +26,8 @@ const utm = 'utm_source=sudohire.dev&utm_medium=referral&utm_campaign=footer';
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{documentTitle}</title>
+    <meta name="description" content={description} />
+    {canonical && <link rel="canonical" href={canonicalUrl} />}
   </head>
   <body>
     <a class="skip" href="#content">Skip to the content</a>
@@ -46,7 +54,7 @@ const utm = 'utm_source=sudohire.dev&utm_medium=referral&utm_campaign=footer';
                 ))}
               </ul>
             </nav>
-            <p class="checked">Written against main. To check against the release.</p>
+            {checked && <p class="checked">Checked against sudo-hire {checked}.</p>}
           </div>
         </div>
       )}

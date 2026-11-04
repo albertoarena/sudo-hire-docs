@@ -1,8 +1,51 @@
 ---
 import Base from '../layouts/Base.astro';
+import ExternalLink from '../components/ExternalLink.astro';
+import { checkedAgainst } from '../data/app';
+import { privacyPolicyUrl } from '../data/links';
 ---
-<Base title="Privacy">
+<Base title="Privacy" description="What this site collects, and a summary of what the Sudo Hire app sends and stores." checked={checkedAgainst}>
   <div class="page">
-    <h1>What happens to my data?</h1>
+    <div>
+      <h1>What happens to my data?</h1>
+      <div class="answer">
+        <p>This page is about two things: this site and the app. The app keeps everything on your Mac. No account, no telemetry. This site loads analytics only after you accept them.</p>
+      </div>
+
+      <h2>What does this site collect?</h2>
+      <p>This site can use Google Analytics, to count visits to its pages. It asks first, in a banner. Accept and Decline weigh the same.</p>
+      <ul>
+        <li>Before you choose, the site sends nothing to Google.</li>
+        <li>Only Accept loads Google Analytics, from Google. All the advertising signals stay off.</li>
+        <li>Decline loads nothing.</li>
+        <li>Your browser stores the choice. This site sets no cookie of its own.</li>
+      </ul>
+      <p>If you see no banner, this site loads no analytics.</p>
+
+      <h2>Is the app the same as this site?</h2>
+      <p>No. The app has no analytics at all. The rules above are for this site only.</p>
+
+      <h2>What does the app send?</h2>
+      <p>The app reads public lists. Each request is a plain download, with no identifier for you, no device id and no usage data. It contacts:</p>
+      <ul>
+        <li>The job boards that you keep on.</li>
+        <li>The career pages of the companies that you add, at most every 6 hours.</li>
+        <li>The European Central Bank, once a day, for exchange rates.</li>
+        <li>GitHub, when the app starts and then at most once a day, to check for a new version.</li>
+      </ul>
+      <p>The search words are fixed (php, laravel). Your keywords never leave your Mac. There is no telemetry and no crash reporting.</p>
+
+      <h2>What does the app store?</h2>
+      <p>Everything stays on your Mac:</p>
+      <ul>
+        <li>Jobs, for 30 days. Saved and applied jobs stay until you remove them.</li>
+        <li>Your settings and the companies that you add.</li>
+        <li>Exchange rates, and a log file with warnings and errors.</li>
+      </ul>
+      <p>To see the files, open Settings, Privacy, and choose “Show data folder in Finder”.</p>
+
+      <h2>Where is the full policy?</h2>
+      <p>The privacy policy of the app is <ExternalLink href={privacyPolicyUrl}>PRIVACY.md</ExternalLink> in sudo-hire. It says what each request sends, what the app stores and how to remove it.</p>
+    </div>
   </div>
 </Base>
