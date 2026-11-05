@@ -69,19 +69,10 @@ The app has no telemetry. The site has GA4 behind consent. These are two differe
 
 ## Deployment
 
-### Now: the placeholder on Cloudflare Workers
-
-- A placeholder page is live on sudohire.dev and www.sudohire.dev since 2026-11-02. It is served from Cloudflare Workers (`wrangler.jsonc`, `src/worker.js`).
-- The Deploy workflow runs the tests and deploys `placeholder/`. It runs only when the owner starts it by hand, so a merge to `main` does not go live. The Astro build is not deployed there.
-- The placeholder stays until the site goes live.
-
-### At the release: the host
-
-- CI runs every check. On a green `main`, a workflow pushes the built `dist/` to a `deploy` branch.
-- A cron job on the host pulls the `deploy` branch into a new release folder and switches a `current` symlink. It keeps the newest 3 releases.
-- CI never connects to the host. The host pulls without credentials, so the repository must be public.
-- So the site goes live at the release, when the owner makes the repository public and does the host steps in `docs/DEPLOYMENT.md`.
-- When the site moves from Workers to the host, the Cloudflare DNS records become DNS only, the Workers route is removed, and the Deploy section of `AGENTS.md` changes with it.
+- Cloudflare Workers serves the site on sudohire.dev and www.sudohire.dev (`wrangler.jsonc`). It serves the files of `dist/` and nothing else. A missing page gets the 404 page.
+- The Deploy workflow runs every check, builds the site with the measurement ID from the repository variable, and deploys it. Then it checks the live site.
+- It runs only when the owner starts it by hand. A merge to `main` does not go live.
+- So the site goes live at the release, when the owner runs the Deploy workflow. Until then, the placeholder of 2026-11-02 stays live.
 
 ## Left out
 
@@ -98,7 +89,7 @@ The app has no telemetry. The site has GA4 behind consent. These are two differe
 1. **The screenshot on Home.** No screenshot exists yet. It must show real jobs, not invented companies or salaries (`PRODUCT.md`), and it must come from the release build. Who takes it, and with which data?
 2. **The download link.** Decided on 2026-11-04: the button links to the latest GitHub release, so it never names a version. Version 1 needs macOS 12 Monterey or later and ships for Apple silicon (arm64) only.
 3. **`TRADEMARK.md` in sudo-hire.** It covers "the design, layout and written copy of the site" on sudohire.dev. The page text is CC BY 4.0, so sudo-hire drops "written copy" from that line. This is a change in sudo-hire, not here.
-4. **The link preview image.** Decided in phase 5: the site reuses the placeholder card (`art/og-card.html`, rendered to `placeholder/og.png`). A new card can replace it later.
+4. **The link preview image.** Decided in phase 5: the site reuses the placeholder card (`art/og-card.html`, rendered to `public/og.png`). A new card can replace it later.
 5. **The type.** `DESIGN.md` uses the system font. The site may keep it, so no font file is needed, or pick a self hosted face. Decided in the design phase.
 6. **The GA4 property.** The owner creates it later. The ID goes in the repository variable `PUBLIC_GA_MEASUREMENT_ID`.
-7. **The host steps.** Which account, which folder and the cron line. Written in phase 7, done by the owner at the release.
+7. **The host.** Decided on 2026-11-05: the site stays on Cloudflare Workers. No other host, no cron job.

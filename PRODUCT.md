@@ -61,7 +61,6 @@ It is not a marketing site. It does not persuade.
 ## Evidence on Hand
 
 - `docs/DESIGN.md` and `docs/design/sudo-hire-ui.html` of sudo-hire: the tokens and the approved app prototype.
-- `placeholder/index.html`: the live placeholder, with the tokens, the strip, the stamp and the tagline at page scale.
 - `resources/icons/menu-bar-mark.svg` of sudo-hire: the menu bar mark. The app icon does not exist yet.
 - **Screenshots:** none yet. The owner takes them from the release build, in light and dark. Until then, a page shows a marked empty frame.
 - **Job data:** real only. Never invent companies, jobs or salaries.
