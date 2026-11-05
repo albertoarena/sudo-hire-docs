@@ -20,7 +20,7 @@ const { title, home = false, checked, indexed = true } = Astro.props;
 const path = Astro.url.pathname;
 const description = pages.find((page) => page.href === path)?.description ?? Astro.props.description ?? '';
 const canonicalUrl = new URL(path, Astro.site).href;
-// The link preview image: placeholder/og.png, copied to public/. Source in art/og-card.html.
+// The link preview image: public/og.png. Source in art/og-card.html.
 const image = { url: new URL('/og.png', Astro.site).href, width: 1200, height: 630, alt: 'Sudo Hire: “Remote” often does not mean remote from anywhere. A job stamped IT, admitted.' };
 const current = groupOf(path);
 const documentTitle = home ? 'Sudo Hire' : `${title} | Sudo Hire`;

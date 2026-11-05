@@ -58,10 +58,10 @@ When the site and these files disagree, stop and ask. Do not guess.
 
 ## Deploy
 
-- Cloudflare Workers serves the site on sudohire.dev and www.sudohire.dev. `wrangler.jsonc` holds the config.
-- The Deploy workflow runs the tests and deploys. It runs only when the owner starts it by hand, from the Actions tab. A merge to `main` does not go live.
-- It needs two repository secrets: `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`. The token needs Workers Scripts Write on the account and Workers Routes Write on the sudohire.dev zone.
-- Cloudflare Web Analytics stays off for sudohire.dev. Its beacon would load before consent. After each deploy, the workflow fails if the live page serves a script.
+- Cloudflare Workers serves the built site (`dist/`) on sudohire.dev and www.sudohire.dev. `wrangler.jsonc` holds the config. A missing page gets the 404 page.
+- The Deploy workflow runs every check, builds the site with the measurement ID and deploys it. It runs only when the owner starts it by hand, from the Actions tab. A merge to `main` does not go live.
+- It needs two repository secrets: `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`. The token needs Workers Scripts Write on the account and Workers Routes Write on the sudohire.dev zone. The build reads the repository variable `PUBLIC_GA_MEASUREMENT_ID`.
+- Cloudflare Web Analytics stays off for sudohire.dev. Its beacon would load before consent. After each deploy, `scripts/check-live.mjs` fails if a live page loads a script file.
 
 ## Before every commit and pull request
 

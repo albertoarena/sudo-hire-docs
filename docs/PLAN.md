@@ -11,7 +11,7 @@ Every phase is test first: the failing test is committed, then the code. One com
 0. **Scope and plan.** `docs/SCOPE.md` and this file. No code.
    Branch: `docs/scope-and-plan`.
 
-1. **Placeholder.** Done on 2026-11-02. One self contained `placeholder/index.html`, served from Cloudflare Workers on sudohire.dev and www.sudohire.dev. It stays live until phase 7 retires it.
+1. **Placeholder.** Done on 2026-11-02. One self contained `placeholder/index.html`, served from Cloudflare Workers on sudohire.dev and www.sudohire.dev. Phase 7 removes it from the repository. It stays live until the first deploy of the site.
    Tests (in place): the page loads nothing from another site, follows the device theme, carries the tagline and links out over https only. After each deploy, the live page has no script.
 
 2. **Scaffold and smoke tests.** Plain Astro, a bare home page, the Vitest and Playwright setup, CI. No design and no copy.
@@ -30,7 +30,7 @@ Every phase is test first: the failing test is committed, then the code. One com
 
 5. **SEO basics:** `robots.txt`, the sitemap, `llms.txt`, the 404 page, Open Graph tags and the link preview image.
    - `llms.txt` gives AI tools a short map of the site: what Sudo Hire is, then each page with its link and its description. It is built from the same page list as the sitemap.
-   - The preview image is the placeholder card (`placeholder/og.png`), copied to `public/og.png`.
+   - The preview image is the placeholder card (`art/og-card.html`), rendered to `public/og.png`.
    Tests: `robots.txt` blocks nothing and names the sitemap; the sitemap lists every page once, on `https://sudohire.dev`, and not the 404; `llms.txt` starts with the name and the summary, lists every page once with the description of the page, and not the 404; the 404 page is `noindex`, has no canonical and links home; each page has a unique description; the Open Graph and Twitter tags are set; the preview image is a PNG and its size matches its tags.
 
 6. **GA4 and the consent gate.**
@@ -39,13 +39,12 @@ Every phase is test first: the failing test is committed, then the code. One com
    Tests (Vitest): an invalid ID fails the build; the consent store reads, writes and clears the choice, and degrades when storage is missing; `dist/` ships no `.js` file, loads no script from another site and has no Google address; every `dist-consent/` page has the banner and no external script; `dist-consent/` ships no `.js` file.
    Tests (Playwright, on `dist-consent/`, with Google routed to an empty answer): the banner shows on every page with no request to another site; Accept loads `gtag.js` only, and is remembered on the next page; Decline loads nothing, now or on the next page; the footer button withdraws the choice and the banner shows again; Accept and Decline have the same size and style; the banner links to `/privacy/`; it covers nothing at the page end and fits 320px; it passes axe in light and dark.
 
-7. **Deploy.** The Publish workflow, the server script, the two `.htaccess` files, `docs/DEPLOYMENT.md` and a redirect check script.
-   - On a green `main`, Publish builds with the measurement ID from the repository variable and force pushes `dist/` to the `deploy` branch.
-   - The server script pulls `deploy` into a new release folder, switches `current` and keeps the newest 3 releases.
-   - The Workers deploy, `wrangler.jsonc`, `src/worker.js` and the placeholder are retired. The Deploy section of `AGENTS.md` describes the host.
-   Tests: Publish runs only after CI passes on a push to `main`, reads the ID from a repository variable and pushes to `deploy`; the server script deploys, reports "up to date" on a second run, keeps 3 releases and follows a force pushed branch (run for real against a local git origin); the release `.htaccess` folds `index.html`, adds the trailing slash, hides `current/` and `releases/` and serves the 404 page; the docroot `.htaccess` forbids `releases/`, redirects http and www before the rewrite, and rewrites to `current/` last.
-   The redirect check runs against the live site after the host steps: no address shows `current/` or `releases/`, every redirect is one hop where it can be, an unknown page is a 404, and no page has the Cloudflare beacon.
-   The site goes live at the release, after the owner makes the repository public and does the host steps.
+7. **Deploy.** Cloudflare Workers serves `dist/`. Decided on 2026-11-05: the site stays on Workers.
+   - `wrangler.jsonc` serves `./dist`, with the 404 page for a missing page. No worker script.
+   - The Deploy workflow runs only when the owner starts it by hand. It runs every check, builds `dist/` with the measurement ID from the repository variable, deploys it, then checks the live site.
+   - The placeholder, its tests and `src/worker.js` are removed.
+   Tests: the config serves `./dist` with the 404 page and has no worker; the workflow has no trigger except the manual one, runs every check before the build with the ID, reads the ID from the repository variable and checks the live site after the deploy; the live check (on a fake site) fails on a script file or the Cloudflare beacon, on a page the app opens that does not answer or redirects, on an unknown page that is not a 404 and on a missing measurement ID.
+   The site goes live at the release, when the owner runs the Deploy workflow.
 
 ## Before the release
 
