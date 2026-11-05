@@ -1,12 +1,12 @@
 // Cloudflare Workers static assets.
-// Until the real site is built, it serves the placeholder page from ./placeholder.
-// A request that matches no file runs src/worker.js, which redirects it to the home page.
+// It serves the site that `npm run build` writes into ./dist. The Deploy workflow builds it first.
+// A request that matches no file gets dist/404.html, with the status 404.
 {
   "name": "sudohire",
-  "main": "src/worker.js",
   "compatibility_date": "2026-11-02",
   "assets": {
-    "directory": "./placeholder"
+    "directory": "./dist",
+    "not_found_handling": "404-page"
   },
   "routes": [
     { "pattern": "sudohire.dev", "custom_domain": true },
