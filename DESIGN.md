@@ -299,7 +299,12 @@ The external link icon of the app: 16 by 16 view box, stroke 1.4, round caps and
 
 ### Favicon
 
-The app icon of sudo-hire (`resources/icons/app-icon.svg`) as `favicon.svg`, and a 180px PNG of it as `apple-touch-icon.png`. The icon is the project's art under `TRADEMARK.md` of sudo-hire, not under the MIT license of the code.
+The app icon of sudo-hire (`resources/icons/app-icon.svg`), in two versions:
+
+- `favicon.svg` is redrawn to read at 16px. It crops to the rounded square, drops the guilloche waves, and makes the stamp and the check larger and heavier.
+- `apple-touch-icon.png` is a 180px PNG from `art/apple-touch-icon.svg`. It fills the whole square with no transparent pixel, because iOS rounds the corners and fills transparency with black.
+
+The icon is the project's art under `TRADEMARK.md` of sudo-hire, not under the MIT license of the code.
 
 ### Footer
 

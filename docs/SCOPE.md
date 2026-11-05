@@ -89,7 +89,7 @@ The app has no telemetry. The site has GA4 behind consent. These are two differe
 1. **The screenshot on Home.** No screenshot exists yet. It must show real jobs, not invented companies or salaries (`PRODUCT.md`), and it must come from the release build. Who takes it, and with which data?
 2. **The download link.** Decided on 2026-11-04: the button links to the latest GitHub release, so it never names a version. Version 1 needs macOS 12 Monterey or later and ships for Apple silicon (arm64) only.
 3. **`TRADEMARK.md` in sudo-hire.** It covers "the design, layout and written copy of the site" on sudohire.dev. The page text is CC BY 4.0, so sudo-hire drops "written copy" from that line. This is a change in sudo-hire, not here.
-4. **The link preview image.** Decided in phase 5: the site reuses the placeholder card (`art/og-card.html`, rendered to `public/og.png`). A new card can replace it later.
+4. **The link preview image.** Decided on 2026-11-05: a card for the docs site (`art/og-card.html`, rendered to `public/og.png`). It shows the tagline, the description of the home page, sudohire.dev and a sample job with its stamp.
 5. **The type.** `DESIGN.md` uses the system font. The site may keep it, so no font file is needed, or pick a self hosted face. Decided in the design phase.
 6. **The GA4 property.** The owner creates it later. The ID goes in the repository variable `PUBLIC_GA_MEASUREMENT_ID`.
 7. **The host.** Decided on 2026-11-05: the site stays on Cloudflare Workers. No other host, no cron job.
