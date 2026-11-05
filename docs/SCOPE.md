@@ -47,7 +47,7 @@ The site documents what the released app does. Nothing more.
 | Help | `/help/` | The questions of the Troubleshooting pane, how to read the log, and how to report a problem (a GitHub issue on sudo-hire). |
 | Not found | `/404.html` | A short page with a link home. |
 
-Also: `robots.txt`, `sitemap.xml`, `llms.txt`, Open Graph tags and a link preview image. `llms.txt` lets AI tools read a short map of the site.
+Also: `robots.txt`, `sitemap.xml`, `llms.txt`, Open Graph tags and a link preview image. `llms.txt` lets AI tools read a short map of the site. `llms-full.txt` gives them the text of every page in one file.
 
 `/privacy/` and `/help/` are fixed. The app opens these two addresses ("Read the privacy policy" in the Privacy pane, and the help link in Troubleshooting). The other paths are this plan's proposal.
 

@@ -30,6 +30,7 @@ Every phase is test first: the failing test is committed, then the code. One com
 
 5. **SEO basics:** `robots.txt`, the sitemap, `llms.txt`, the 404 page, Open Graph tags and the link preview image.
    - `llms.txt` gives AI tools a short map of the site: what Sudo Hire is, then each page with its link and its description. It is built from the same page list as the sitemap.
+   - Added on 2026-11-05: `llms-full.txt`, the text of every page in one file. After the build, it is made from the main of each built page, in the order of the navigation. `llms.txt` names it under Optional.
    - The preview image is the placeholder card (`art/og-card.html`), rendered to `public/og.png`.
    Tests: `robots.txt` blocks nothing and names the sitemap; the sitemap lists every page once, on `https://sudohire.dev`, and not the 404; `llms.txt` starts with the name and the summary, lists every page once with the description of the page, and not the 404; the 404 page is `noindex`, has no canonical and links home; each page has a unique description; the Open Graph and Twitter tags are set; the preview image is a PNG and its size matches its tags.
 
