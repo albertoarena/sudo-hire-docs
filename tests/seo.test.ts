@@ -66,7 +66,8 @@ describe('sitemap.xml', () => {
 
 describe('llms.txt', () => {
   const llms = read('llms.txt');
-  const links = [...llms.matchAll(/^- \[([^\]]+)\]\(([^)]+)\): (.+)$/gm)];
+  // The page links. The link to llms-full.txt, under Optional, is tested in llms-full.test.ts.
+  const links = [...llms.split('\n## Optional\n')[0].matchAll(/^- \[([^\]]+)\]\(([^)]+)\): (.+)$/gm)];
 
   it('starts with the name and the summary', () => {
     expect(llms).toMatch(/^# Sudo Hire\n\n> \S.+\n/);
