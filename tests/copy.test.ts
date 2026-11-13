@@ -89,6 +89,10 @@ describe('/settings/', () => {
       expect(text).toContain(label);
     }
   });
+
+  it('lists what the diagnostic report has, as the app does', () => {
+    expect(textOf('settings')).toContain('the app version, the macOS version, the PHP version and the status of each source');
+  });
 });
 
 describe('/sources/', () => {
@@ -127,5 +131,9 @@ describe('/help/', () => {
   it('says how to report a problem', () => {
     expect(text).toContain('Copy diagnostic report');
     expect(text).toContain('Report a problem');
+  });
+
+  it('lists what the diagnostic report has, as the app does', () => {
+    expect(text).toContain('the app version, the macOS version, the PHP version and the status of each source');
   });
 });
