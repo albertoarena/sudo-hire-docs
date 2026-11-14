@@ -8,9 +8,8 @@ import { llmsHead } from '../data/llms';
 // After the build, it reads the main of each built page, in the order of the
 // navigation, and writes it as Markdown. The page h1 becomes an h2.
 
-// Parts of the main that are not text: the contents list repeats the
-// headings, the icons and the hidden text are for the screen, and the
-// screenshot frame has no screenshot yet.
+// Parts of the main that are not text. The contents list repeats the
+// headings. The icons, the hidden text and the screenshot are for the screen.
 const DROP = 'nav, svg, figure, script, style, .visually-hidden';
 
 type Block = string;
