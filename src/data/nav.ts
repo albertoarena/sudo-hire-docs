@@ -61,7 +61,7 @@ export const groups: NavGroup[] = [
     pages: [{
         href: '/roadmap/',
         label: 'Roadmap',
-        description: 'The changes planned for Sudo Hire after v1.0.0. Nothing here has a date.',
+        description: 'The changes planned for Sudo Hire after v1.0.1. Nothing here has a date.',
       }],
   },
 ];

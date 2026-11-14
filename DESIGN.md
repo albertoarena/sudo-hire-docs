@@ -283,7 +283,7 @@ The one primary action of a view. Burgundy fill, `burgundy-ink` text, 17px weigh
 
 ### Screenshot frame
 
-A figure for a screenshot of the app, with a caption below in 14px `ink-3`. Home shows a screenshot of the menu bar list in v1.0.0, with real jobs. It has one screenshot for each theme, and the site shows the one of the theme in use. Each is the popover alone, with no window shadow, 300px wide at most, with a 0.5px `rule` border and radius 10px. A figure with no screenshot yet shows an empty frame. The frame is on `sunk`, 300px wide at most, in the 400 by 640 ratio of the popover. It has a 1px dashed `ink-3` border, radius 10px, and centered 14px `ink-3` text that says where the screenshot will come from.
+A figure for a screenshot of the app, with a caption below in 14px `ink-3`. Home shows a screenshot of the menu bar list in v1.0.1, with real jobs. It has one screenshot for each theme, and the site shows the one of the theme in use. Each is the popover alone, with no window shadow, 300px wide at most, with a 0.5px `rule` border and radius 10px. A figure with no screenshot yet shows an empty frame. The frame is on `sunk`, 300px wide at most, in the 400 by 640 ratio of the popover. It has a 1px dashed `ink-3` border, radius 10px, and centered 14px `ink-3` text that says where the screenshot will come from.
 
 ### On this page
 
