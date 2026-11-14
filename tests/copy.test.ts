@@ -155,3 +155,21 @@ describe('/help/', () => {
     expect(text).toContain('the app version, the macOS version, the PHP version and the status of each source');
   });
 });
+
+describe('/roadmap/', () => {
+  const text = textOf('roadmap');
+
+  it('lists the planned changes of the app, with no date', () => {
+    expect(text).toContain('Nothing here has a date.');
+    expect(text).toContain('About');
+    expect(text).toContain('Sudo Hire 1.1.0 is ready. It installs when you quit Sudo Hire.');
+  });
+
+  it('records the roadmap that it was checked against', () => {
+    expect(readFileSync(join(dist, 'roadmap', 'index.html'), 'utf8')).toContain('Checked against sudo-hire main at edebd16.');
+  });
+
+  it('is in its own group of the navigation', () => {
+    expect(readFileSync(join(dist, 'index.html'), 'utf8')).toMatch(/<a [^>]*href="\/roadmap\/"[^>]*>What’s next<\/a>/);
+  });
+});

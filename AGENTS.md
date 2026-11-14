@@ -12,6 +12,7 @@ This is the docs site for Sudo Hire, a macOS menu bar app. The app lives in the 
 - Every page must match the shipped app: the same screens, the same words, the same settings and the same defaults.
 - When the app changes in a release, the site changes with it.
 - Do not document a feature before it is released.
+- One exception: the Roadmap page (`/roadmap/`) lists the planned changes of `docs/ROADMAP.md` in sudo-hire. It says that nothing there has a date. A change leaves the page when it is released.
 
 ## Sources of truth
 
@@ -23,6 +24,7 @@ These files in sudo-hire are the sources of truth:
 - `docs/DECISIONS.md`
 - `PRIVACY.md`
 - `TRADEMARK.md`
+- `docs/ROADMAP.md`: only for the Roadmap page.
 
 When the site and these files disagree, stop and ask. Do not guess.
 
