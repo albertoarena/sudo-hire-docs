@@ -1,0 +1,20 @@
+---
+import Base from '../layouts/Base.astro';
+import { roadmapCheckedAgainst } from '../data/app';
+---
+<Base title="Roadmap" checked={roadmapCheckedAgainst}>
+  <div class="page">
+    <div>
+      <h1>What comes next?</h1>
+      <div class="answer">
+        <p>These are the changes planned for Sudo Hire after v1.0.0. Nothing here has a date. When a change is released, it leaves this list, and the other pages describe it.</p>
+      </div>
+
+      <h2 id="next">Next</h2>
+      <ul>
+        <li><strong>An About section in Settings.</strong> It shows the app version, for example “Sudo Hire 1.0.1”. Today the version is only in Get Info in Finder and in the diagnostic report.</li>
+        <li><strong>One update notification, in the words of the app.</strong> When a new version is ready, only this notification shows: “Sudo Hire 1.1.0 is ready. It installs when you quit Sudo Hire.”</li>
+      </ul>
+    </div>
+  </div>
+</Base>

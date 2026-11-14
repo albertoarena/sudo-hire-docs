@@ -1,4 +1,4 @@
-// The site navigation: four question groups, each with its pages (docs/SCOPE.md).
+// The site navigation: five question groups, each with its pages (docs/SCOPE.md).
 // A group link opens the first page of the group. This is also the page list of
 // the sitemap and llms.txt, and the source of each page description.
 export type NavPage = { href: string; label: string; description: string };
@@ -54,6 +54,14 @@ export const groups: NavGroup[] = [
         href: '/privacy/',
         label: 'Privacy',
         description: 'What this site collects, and a summary of what the Sudo Hire app sends and stores.',
+      }],
+  },
+  {
+    label: 'What’s next',
+    pages: [{
+        href: '/roadmap/',
+        label: 'Roadmap',
+        description: 'The changes planned for Sudo Hire after v1.0.0. Nothing here has a date.',
       }],
   },
 ];
