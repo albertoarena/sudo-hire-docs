@@ -174,7 +174,7 @@ describe('/roadmap/', () => {
   });
 
   it('records the roadmap that it was checked against', () => {
-    expect(readFileSync(join(dist, 'roadmap', 'index.html'), 'utf8')).toContain('Checked against sudo-hire main at edebd16.');
+    expect(readFileSync(join(dist, 'roadmap', 'index.html'), 'utf8')).toContain('Checked against sudo-hire main at aefced4.');
   });
 
   it('is in its own group of the navigation', () => {
