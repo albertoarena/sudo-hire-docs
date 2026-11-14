@@ -34,6 +34,14 @@ describe('/', () => {
     expect(text).toContain('menu bar app');
     expect(text).toContain('Download for Mac');
   });
+
+  it('shows the screenshot of the menu bar list in each theme', () => {
+    const html = readFileSync(join(dist, 'index.html'), 'utf8');
+    for (const theme of ['light', 'dark']) {
+      expect(html).toMatch(new RegExp(`<img[^>]+src="/home-${theme}\\.webp"[^>]+alt="[^"]+"`));
+    }
+    expect(text).not.toContain('comes from the release build');
+  });
 });
 
 describe('/install/', () => {

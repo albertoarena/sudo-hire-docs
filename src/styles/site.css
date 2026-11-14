@@ -103,13 +103,22 @@ p { margin: 0 0 16px; text-wrap: pretty; }
 .button:hover { filter: brightness(1.12); }
 .button svg { width: 16px; height: 16px; }
 
-/* A screenshot of the app, or the marked frame where it will go. */
+/* A screenshot of the app, or the marked frame where one will go. */
 .shot { margin: 0; }
 .shot .frame {
   display: grid; place-items: center; aspect-ratio: 400 / 640; max-width: 300px;
   background: var(--sunk); border: 1px dashed var(--ink-3); border-radius: 10px;
   padding: 24px; text-align: center; font-size: 14px; color: var(--ink-3);
 }
+/* The screenshot of the theme in use. The dark one loads only when it shows. */
+.shot img { display: block; width: 100%; max-width: 300px; height: auto; border: 0.5px solid var(--rule); border-radius: 10px; }
+.shot .shot-dark { display: none; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .shot .shot-light { display: none; }
+  :root:not([data-theme="light"]) .shot .shot-dark { display: block; }
+}
+:root[data-theme="dark"] .shot .shot-light { display: none; }
+:root[data-theme="dark"] .shot .shot-dark { display: block; }
 .shot figcaption { margin-top: 10px; font-size: 14px; color: var(--ink-3); }
 
 .home { grid-template-columns: minmax(0, 1fr) minmax(0, 300px); align-items: start; gap: 48px 96px; }
