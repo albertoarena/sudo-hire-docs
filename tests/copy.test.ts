@@ -55,6 +55,19 @@ describe('/install/', () => {
       expect(text).toContain(`“${button}”`);
     }
   });
+
+  it('gives the Notifications part of the first scan in the words of the app', () => {
+    for (const words of [
+      'Notifications',
+      '“Send a test notification”',
+      'Sudo Hire sends one summary when new jobs match. macOS asks once if Sudo Hire can send notifications: choose Allow.',
+      'Notifications work. Sudo Hire sends one summary when new jobs match.',
+      'Sent. If no notification shows, open System Settings, Notifications, Sudo Hire, and allow notifications.',
+      'Sudo Hire could not send it. Open System Settings, Notifications, Sudo Hire, and allow notifications.',
+    ]) {
+      expect(text).toContain(words);
+    }
+  });
 });
 
 describe('/how-it-works/', () => {
@@ -73,6 +86,11 @@ describe('/how-it-works/', () => {
 
   it('gives the notification in the words of the app', () => {
     expect(text).toContain('6 new jobs: 4 Laravel, 2 PHP');
+  });
+
+  it('gives the update notification of macOS and the wait before the next start', () => {
+    expect(text).toContain('A new update is ready to install');
+    expect(text).toContain('wait a few seconds');
   });
 });
 
