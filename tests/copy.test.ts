@@ -64,6 +64,12 @@ describe('/install/', () => {
     }
   });
 
+  it('says that Enter adds a keyword and that keywords match titles and tags', () => {
+    expect(text).toContain('Press Enter after each one.');
+    expect(text).toContain('Keywords match job titles and tags.');
+    expect(text).not.toContain('Return');
+  });
+
   it('gives the Notifications part of the first scan in the words of the app', () => {
     for (const words of [
       'Notifications',
@@ -92,6 +98,12 @@ describe('/how-it-works/', () => {
     expect(text).toMatch(/Not.{0,20}Admitted/);
   });
 
+  it('gives the line that says where a keyword matched, in the words of the app', () => {
+    for (const line of ['Matched "laravel" in the title', 'Matched "php" in the tags from Remotive', 'Matched "php" in the description']) {
+      expect(text).toContain(line);
+    }
+  });
+
   it('gives the notification in the words of the app', () => {
     expect(text).toContain('6 new jobs: 4 Laravel, 2 PHP');
   });
@@ -114,6 +126,13 @@ describe('/settings/', () => {
     for (const label of ['Country', 'Timezone', 'Work mode', 'Location not stated', 'Time difference', 'Include', 'Exclude', 'Posted within', 'Hide companies', 'Show amounts in', 'Minimum per year', 'Payments per year', 'Minimum per day', 'Salary not stated', 'Notify at most every', 'Open log folder', 'Copy diagnostic report', 'Report a problem']) {
       expect(text).toContain(label);
     }
+  });
+
+  it('says that Enter adds a keyword, as the hints of the app do', () => {
+    const text = textOf('settings');
+    expect(text).toContain('Type a keyword and press Enter.');
+    expect(text).toContain('Press Enter after each keyword.');
+    expect(text).not.toContain('Return');
   });
 
   it('lists what the diagnostic report has, as the app does', () => {
@@ -161,6 +180,15 @@ describe('/help/', () => {
 
   it('lists what the diagnostic report has, as the app does', () => {
     expect(text).toContain('the app version, the macOS version, the PHP version and the status of each source');
+    expect(text).toContain('Sudo Hire 1.0.2');
+  });
+
+  it('records the release that it was checked against', () => {
+    expect(readFileSync(join(dist, 'help', 'index.html'), 'utf8')).toContain('Checked against sudo-hire v1.0.2.');
+  });
+
+  it('says where to see why a job matched a keyword', () => {
+    expect(text).toContain('Matched "php" in the tags from Remotive');
   });
 });
 
@@ -171,6 +199,11 @@ describe('/roadmap/', () => {
     expect(text).toContain('Nothing here has a date.');
     expect(text).toContain('About');
     expect(text).toContain('Sudo Hire 1.1.0 is ready. It installs when you quit Sudo Hire.');
+  });
+
+  it('starts after the last release and says what it already shows for a tag match', () => {
+    expect(text).toContain('planned for Sudo Hire after v1.0.2');
+    expect(text).toContain('Since v1.0.2, the list row says where the keyword matched');
   });
 
   it('records the roadmap that it was checked against', () => {

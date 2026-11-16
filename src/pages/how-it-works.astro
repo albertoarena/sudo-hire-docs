@@ -61,6 +61,13 @@ const sections = [
         <li>“Applied” holds the jobs that you marked as applied.</li>
       </ul>
       <p>Each job shows its title, its stamp, its company, its source as “via” and the source name, and its age. The pay line shows the salary as the job states it, and the converted amount after ≈. “?” means that the salary is not stated or cannot be compared. “OTE” means on-target earnings.</p>
+      <p>Under the pay line, the job says which of your keywords it matched, and where. It names the first keyword in Include that matches. For example:</p>
+      <ul>
+        <li>Matched "laravel" in the title</li>
+        <li>Matched "php" in the tags from Remotive</li>
+        <li>Matched "php" in the description</li>
+      </ul>
+      <p>Only a match in the tags names the job board, because the job board adds the tags. A match in the description is possible only when “Also match the job description” is on. The line does not show when Include has no keywords.</p>
       <p>Each job has these buttons:</p>
       <ul>
         <li>“Save” moves the job to Saved.</li>
