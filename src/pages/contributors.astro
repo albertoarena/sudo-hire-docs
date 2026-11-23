@@ -1,0 +1,31 @@
+---
+import Base from '../layouts/Base.astro';
+import ExternalLink from '../components/ExternalLink.astro';
+import { checkedAgainst } from '../data/app';
+import { contributingUrl } from '../data/links';
+---
+<Base title="Contributors" checked={checkedAgainst}>
+  <div class="page">
+    <div>
+      <h1>Who made Sudo Hire?</h1>
+      <div class="answer">
+        <p>Sudo Hire is open source, under the MIT license. These people contributed to it.</p>
+      </div>
+
+      <h2 id="alberto-arena">Alberto Arena</h2>
+      <p>Alberto Arena created Sudo Hire and maintains it. On GitHub: <ExternalLink href="https://github.com/albertoarena">@albertoarena</ExternalLink>.</p>
+
+      <h2 id="daniele-barbaro">Daniele Barbaro</h2>
+      <p>On GitHub: <ExternalLink href="https://github.com/danielebarbaro">@danielebarbaro</ExternalLink>.</p>
+      <ul>
+        <li>He wrote the Workable reader. With it, Sudo Hire reads the career pages of companies that use Workable.</li>
+        <li>He checked the terms of Workable for this reader.</li>
+        <li>He researched how Workable companies list the locations of remote jobs.</li>
+        <li>He wrote connectors for more career page providers, under the MIT license: <ExternalLink href="https://github.com/plin-code/job-boards-smartrecruiters">job-boards-smartrecruiters</ExternalLink> and <ExternalLink href="https://github.com/plin-code/job-boards-bamboohr">job-boards-bamboohr</ExternalLink>.</li>
+      </ul>
+
+      <h2 id="contribute">How can I contribute?</h2>
+      <p>Read <ExternalLink href={contributingUrl}>CONTRIBUTING.md</ExternalLink> in sudo-hire. Each person who contributes is named on this page.</p>
+    </div>
+  </div>
+</Base>
