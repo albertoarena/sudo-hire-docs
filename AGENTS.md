@@ -77,6 +77,8 @@ Do two passes.
    - Do not name AI sessions or reviews.
    - Do not evaluate tools or companies.
    - No secrets, private notes or personal data.
+   - Contributors are the exception. Name a person who contributes to Sudo Hire with credit on the Contributors page. Link their public repositories when Sudo Hire uses or may reuse their work. Keep their license terms.
+   - Private messages and evaluations of their work stay confidential.
 
 These rules also apply to fixtures, comments and test names.
 

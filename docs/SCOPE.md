@@ -46,6 +46,7 @@ The site documents what the released app does. Nothing more.
 | Privacy | `/privacy/` | This site: the consent gate and GA4. A short summary of the app, with a link to `PRIVACY.md`. |
 | Help | `/help/` | The questions of the Troubleshooting pane, how to read the log, and how to report a problem (a GitHub issue on sudo-hire). |
 | Roadmap | `/roadmap/` | The planned changes of `docs/ROADMAP.md` in sudo-hire, in the words of the user, with no date. A change leaves the page when it is released. It is the one page about work that is not released. Decided by the owner on 2026-11-14. |
+| Contributors | `/contributors/` | Each person who contributed to Sudo Hire, with what they did and a link to their GitHub profile. Public repositories are linked when Sudo Hire uses or may reuse their work. Decided by the owner on 2026-11-23. |
 | Not found | `/404.html` | A short page with a link home. |
 
 Also: `robots.txt`, `sitemap.xml`, `llms.txt`, Open Graph tags and a link preview image. `llms.txt` lets AI tools read a short map of the site. `llms-full.txt` gives them the text of every page in one file.
