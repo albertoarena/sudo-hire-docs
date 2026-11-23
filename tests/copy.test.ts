@@ -149,7 +149,7 @@ describe('/sources/', () => {
   });
 
   it('names each career page provider', () => {
-    for (const provider of ['Greenhouse', 'Lever', 'Ashby', 'Personio']) expect(text).toContain(provider);
+    for (const provider of ['Greenhouse', 'Lever', 'Ashby', 'Personio', 'Workable']) expect(text).toContain(provider);
     expect(text).toContain('via Acme careers');
   });
 });
