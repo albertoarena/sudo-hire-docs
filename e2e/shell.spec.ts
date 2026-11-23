@@ -1,8 +1,8 @@
 import { expect, test } from '@playwright/test';
 import { builtPages } from './pages';
 
-// The eight pages of docs/SCOPE.md. The navigation must reach each of them.
-const sitePages = ['/', '/how-it-works/', '/install/', '/settings/', '/sources/', '/privacy/', '/help/', '/roadmap/'];
+// The nine pages of docs/SCOPE.md. The navigation must reach each of them.
+const sitePages = ['/', '/how-it-works/', '/install/', '/settings/', '/sources/', '/privacy/', '/help/', '/roadmap/', '/contributors/'];
 
 test('the site builds every page of the scope', () => {
   expect(builtPages()).toEqual(expect.arrayContaining(sitePages));
