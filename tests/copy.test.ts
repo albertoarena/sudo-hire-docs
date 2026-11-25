@@ -234,6 +234,7 @@ describe('/contributors/', () => {
 
   it('credits the Workable reader', () => {
     expect(text).toContain('He wrote the Workable reader.');
+    expect(text).toContain('His work is in Sudo Hire since v1.1.0');
   });
 
   it('links to CONTRIBUTING.md in sudo-hire', () => {
