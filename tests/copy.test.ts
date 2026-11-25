@@ -224,3 +224,24 @@ describe('/roadmap/', () => {
     expect(readFileSync(join(dist, 'index.html'), 'utf8')).toMatch(/<a [^>]*href="\/roadmap\/"[^>]*>What’s next<\/a>/);
   });
 });
+
+describe('/contributors/', () => {
+  const text = textOf('contributors');
+
+  it('names each contributor with a section', () => {
+    expect(headingsOf('contributors', 2)).toEqual(expect.arrayContaining(['Alberto Arena', 'Daniele Barbaro']));
+  });
+
+  it('credits the Workable reader', () => {
+    expect(text).toContain('He wrote the Workable reader.');
+    expect(text).toContain('His work is in Sudo Hire since v1.1.0');
+  });
+
+  it('links to CONTRIBUTING.md in sudo-hire', () => {
+    expect(readFileSync(join(dist, 'contributors', 'index.html'), 'utf8')).toContain('https://github.com/albertoarena/sudo-hire/blob/main/CONTRIBUTING.md');
+  });
+
+  it('is in its own group of the navigation', () => {
+    expect(readFileSync(join(dist, 'index.html'), 'utf8')).toMatch(/<a [^>]*href="\/contributors\/"[^>]*>Who made it<\/a>/);
+  });
+});

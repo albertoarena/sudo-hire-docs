@@ -7,3 +7,5 @@ export const downloadUrl = `${repo}/releases/latest`;
 export const issueUrl = `${repo}/issues/new`;
 export const privacyPolicyUrl = `${repo}/blob/main/PRIVACY.md`;
 export const securityUrl = `${repo}/blob/main/SECURITY.md`;
+export const pullUrl = `${repo}/pull`;
+export const contributingUrl = `${repo}/blob/main/CONTRIBUTING.md`;
