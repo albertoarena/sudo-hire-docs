@@ -128,6 +128,10 @@ describe('/settings/', () => {
     }
   });
 
+  it('says how a company gets its name', () => {
+    expect(textOf('settings')).toContain('jimdo.com shows as “Jimdo”');
+  });
+
   it('says that Enter adds a keyword, as the hints of the app do', () => {
     const text = textOf('settings');
     expect(text).toContain('Type a keyword and press Enter.');
@@ -151,6 +155,10 @@ describe('/sources/', () => {
   it('names each career page provider', () => {
     for (const provider of ['Greenhouse', 'Lever', 'Ashby', 'Personio', 'Workable']) expect(text).toContain(provider);
     expect(text).toContain('via Acme careers');
+  });
+
+  it('says that Lever covers the EU instance', () => {
+    expect(text).toContain('EU instance of Lever. Choose Lever for them too.');
   });
 });
 
@@ -180,11 +188,11 @@ describe('/help/', () => {
 
   it('lists what the diagnostic report has, as the app does', () => {
     expect(text).toContain('the app version, the macOS version, the PHP version and the status of each source');
-    expect(text).toContain('Sudo Hire 1.0.2');
+    expect(text).toContain('Sudo Hire 1.1.0');
   });
 
   it('records the release that it was checked against', () => {
-    expect(readFileSync(join(dist, 'help', 'index.html'), 'utf8')).toContain('Checked against sudo-hire v1.0.2.');
+    expect(readFileSync(join(dist, 'help', 'index.html'), 'utf8')).toContain('Checked against sudo-hire v1.1.0.');
   });
 
   it('says where to see why a job matched a keyword', () => {
@@ -199,15 +207,17 @@ describe('/roadmap/', () => {
     expect(text).toContain('Nothing here has a date.');
     expect(text).toContain('About');
     expect(text).toContain('Sudo Hire 1.1.0 is ready. It installs when you quit Sudo Hire.');
+    expect(text).toContain('SmartRecruiters and BambooHR');
+    expect(text).toContain('Next read at 23:55');
   });
 
   it('starts after the last release and says what it already shows for a tag match', () => {
-    expect(text).toContain('planned for Sudo Hire after v1.0.2');
+    expect(text).toContain('planned for Sudo Hire after v1.1.0');
     expect(text).toContain('Since v1.0.2, the list row says where the keyword matched');
   });
 
   it('records the roadmap that it was checked against', () => {
-    expect(readFileSync(join(dist, 'roadmap', 'index.html'), 'utf8')).toContain('Checked against sudo-hire main at ba928d9.');
+    expect(readFileSync(join(dist, 'roadmap', 'index.html'), 'utf8')).toContain('Checked against sudo-hire main at f20fe06.');
   });
 
   it('is in its own group of the navigation', () => {
